@@ -1,0 +1,42 @@
+.background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  padding-top: 0;
+  /* scroll do viewport */
+}
+
+.bannerContainer {
+  width: 100%;
+  height: 200px;
+  background-color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.actions {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 8px 12px;
+  background-color: var(--background-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.cardapio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  gap: 10px;
+}

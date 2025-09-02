@@ -1,0 +1,31 @@
+.carouselOption {
+    cursor: pointer;
+    min-width: 50px;
+    min-height: 50px;
+    padding: 10px;
+
+    /* largura mínima do card */
+    flex: 0 0 auto;
+    /* evita que encolha */
+    color: var(--foreground-color);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.selectedCarouselOption {
+    background-color: var(--background-color);
+    cursor: pointer;
+    min-width: 50px;
+    padding: 5px;
+    /* largura mínima do card */
+    flex: 0 0 auto;
+    /* evita que encolha */
+    color: var(--foreground-color);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+}

@@ -1,0 +1,51 @@
+.actions {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background-color: var(--background-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+.ShoppingCart {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    padding: 10px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    /* não encolhe */
+}
+
+.totalPreco {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-left: 8px;
+    color: var(--foreground-color);
+    white-space: nowrap;
+    /* evita quebrar em várias linhas e gerar overflow */
+}
+
+
+.ShoppingCart {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    padding: 10px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    /* não encolhe */
+}
+
+.totalPreco {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-left: 8px;
+    color: var(--foreground-color);
+    white-space: nowrap;
+    /* evita quebrar em várias linhas e gerar overflow */
+}

@@ -1,0 +1,51 @@
+.header {
+    display: flex;
+    /* inline-flex removido */
+    align-items: center;
+    justify-content: space-between;
+    /* melhor para distribuir itens */
+    padding: 0 20px;
+    height: 60px;
+    /* aumenta para caber botão e título */
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 1.5rem;
+    /* responsivo */
+    font-weight: bold;
+    color: #000;
+}
+
+.toggleOptions {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 0 10px;
+        height: 50px;
+    }
+
+    .title {
+        font-size: 1.2rem;
+    }
+
+    .toggleOptions {
+        width: 35px;
+        height: 35px;
+    }
+}
