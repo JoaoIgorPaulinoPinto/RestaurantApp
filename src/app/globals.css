@@ -28,8 +28,7 @@ body {
 
   /* --- Destaques --- */
   --accent-color: crimson;
-  --blue-color: rgb(0, 119, 255);
-
+  --blue-color: #249ed2;
   /* --- Sombras --- */
   --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   /* sombra mais leve */

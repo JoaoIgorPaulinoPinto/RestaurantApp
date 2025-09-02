@@ -1,0 +1,244 @@
+{
+    "Produtos": [
+        {
+            "id": 1,
+            "name": "X-Burguer",
+            "preco": 15,
+            "categoria": "Hamburguer",
+            "descricao": "Pão, Hamburguer, Queijo, Maionese e Ketchup",
+            "quantidade": 0
+        },
+        {
+            "id": 2,
+            "name": "Pizza Calabresa",
+            "preco": 42,
+            "categoria": "Pizza",
+            "descricao": "Pizza com molho de tomate, queijo muçarela e calabresa fatiada.",
+            "quantidade": 0
+        },
+        {
+            "id": 3,
+            "name": "Picolé de Morango",
+            "preco": 5,
+            "categoria": "Picolé",
+            "descricao": "Picolé refrescante sabor morango natural.",
+            "quantidade": 0
+        },
+        {
+            "id": 4,
+            "name": "Bolo de Chocolate",
+            "preco": 30,
+            "categoria": "Bolo",
+            "descricao": "Bolo fofinho de chocolate com cobertura cremosa.",
+            "quantidade": 0
+        },
+        {
+            "id": 5,
+            "name": "Cerveja Pilsen 600ml",
+            "preco": 9,
+            "categoria": "Cerveja",
+            "descricao": "Cerveja pilsen gelada, garrafa 600ml.",
+            "quantidade": 0
+        },
+        {
+            "id": 6,
+            "name": "Prato Feito de Frango",
+            "preco": 22,
+            "categoria": "PratoFeito",
+            "descricao": "Arroz, feijão, frango grelhado, salada e batata frita.",
+            "quantidade": 0
+        },
+        {
+            "id": 7,
+            "name": "Suco de Laranja Natural",
+            "preco": 8,
+            "categoria": "Bebidas",
+            "descricao": "Suco fresco de laranja sem adição de açúcar.",
+            "quantidade": 0
+        },
+        {
+            "id": 8,
+            "name": "Vinho Tinto Seco",
+            "preco": 59,
+            "categoria": "Vinhos",
+            "descricao": "Vinho tinto seco, garrafa 750ml, safra especial.",
+            "quantidade": 0
+        },
+        {
+            "id": 9,
+            "name": "X-Salada",
+            "preco": 18,
+            "categoria": "Hamburguer",
+            "descricao": "Pão, Hamburguer, Queijo, Alface, Tomate, Maionese.",
+            "quantidade": 0
+        },
+        {
+            "id": 10,
+            "name": "Pizza Portuguesa",
+            "preco": 48,
+            "categoria": "Pizza",
+            "descricao": "Molho de tomate, queijo, presunto, ovos, cebola e azeitona.",
+            "quantidade": 0
+        },
+        {
+            "id": 11,
+            "name": "Pudim de Leite",
+            "preco": 14,
+            "categoria": "Sobremesa",
+            "descricao": "Pudim de leite condensado tradicional com calda de caramelo.",
+            "quantidade": 0
+        },
+        {
+            "id": 12,
+            "name": "Refrigerante Lata",
+            "preco": 6,
+            "categoria": "Bebidas",
+            "descricao": "Lata 350ml, escolha entre Coca-Cola, Pepsi ou Guaraná.",
+            "quantidade": 0
+        },
+        {
+            "id": 13,
+            "name": "Café Expresso",
+            "preco": 4,
+            "categoria": "Bebidas",
+            "descricao": "Café expresso forte e encorpado, servido na xícara pequena.",
+            "quantidade": 0
+        },
+        {
+            "id": 14,
+            "name": "Salada Caesar",
+            "preco": 25,
+            "categoria": "Salada",
+            "descricao": "Alface americana, frango grelhado, croutons e molho Caesar.",
+            "quantidade": 0
+        },
+        {
+            "id": 15,
+            "name": "Torta de Limão",
+            "preco": 20,
+            "categoria": "Sobremesa",
+            "descricao": "Torta gelada com recheio de limão e cobertura de merengue.",
+            "quantidade": 0
+        },
+        {
+            "id": 16,
+            "name": "X-Bacon",
+            "preco": 20,
+            "categoria": "Hamburguer",
+            "descricao": "Pão, Hamburguer, Bacon, Queijo, Maionese.",
+            "quantidade": 0
+        },
+        {
+            "id": 17,
+            "name": "Pizza 4 Queijos",
+            "preco": 50,
+            "categoria": "Pizza",
+            "descricao": "Molho de tomate, mussarela, provolone, gorgonzola e parmesão.",
+            "quantidade": 0
+        },
+        {
+            "id": 18,
+            "name": "Sorvete de Chocolate",
+            "preco": 7,
+            "categoria": "Sobremesa",
+            "descricao": "Sorvete cremoso sabor chocolate, 100ml.",
+            "quantidade": 0
+        },
+        {
+            "id": 19,
+            "name": "Água Mineral 500ml",
+            "preco": 3,
+            "categoria": "Bebidas",
+            "descricao": "Água mineral sem gás, garrafa 500ml.",
+            "quantidade": 0
+        },
+        {
+            "id": 20,
+            "name": "Salada Tropical",
+            "preco": 22,
+            "categoria": "Salada",
+            "descricao": "Alface, rúcula, manga, tomate e molho de iogurte.",
+            "quantidade": 0
+        },
+        {
+            "id": 21,
+            "name": "Prato Feito de Carne",
+            "preco": 24,
+            "categoria": "PratoFeito",
+            "descricao": "Arroz, feijão, carne grelhada, salada e batata frita.",
+            "quantidade": 0
+        },
+        {
+            "id": 22,
+            "name": "Cerveja IPA 600ml",
+            "preco": 12,
+            "categoria": "Cerveja",
+            "descricao": "Cerveja IPA artesanal gelada, garrafa 600ml.",
+            "quantidade": 0
+        },
+        {
+            "id": 23,
+            "name": "Suco de Abacaxi com Hortelã",
+            "preco": 9,
+            "categoria": "Bebidas",
+            "descricao": "Suco natural refrescante, sem açúcar.",
+            "quantidade": 0
+        },
+        {
+            "id": 24,
+            "name": "Bolo de Cenoura",
+            "preco": 28,
+            "categoria": "Bolo",
+            "descricao": "Bolo fofinho de cenoura com cobertura de chocolate.",
+            "quantidade": 0
+        },
+        {
+            "id": 25,
+            "name": "Tapioca de Queijo",
+            "preco": 12,
+            "categoria": "PratoFeito",
+            "descricao": "Tapioca recheada com queijo coalho.",
+            "quantidade": 0
+        },
+        {
+            "id": 26,
+            "name": "Chocolate Quente",
+            "preco": 6,
+            "categoria": "Bebidas",
+            "descricao": "Bebida quente de chocolate cremoso, 200ml.",
+            "quantidade": 0
+        },
+        {
+            "id": 27,
+            "name": "Pizza Marguerita",
+            "preco": 45,
+            "categoria": "Pizza",
+            "descricao": "Molho de tomate, mussarela, manjericão fresco.",
+            "quantidade": 0
+        },
+        {
+            "id": 28,
+            "name": "X-Egg",
+            "preco": 19,
+            "categoria": "Hamburguer",
+            "descricao": "Pão, Hamburguer, Ovo, Queijo, Maionese.",
+            "quantidade": 0
+        },
+        {
+            "id": 29,
+            "name": "Sorvete de Morango",
+            "preco": 7,
+            "categoria": "Sobremesa",
+            "descricao": "Sorvete cremoso sabor morango, 100ml.",
+            "quantidade": 0
+        },
+        {
+            "id": 30,
+            "name": "Salada Grega",
+            "preco": 23,
+            "categoria": "Salada",
+            "descricao": "Alface, tomate, pepino, queijo feta e azeitonas.",
+            "quantidade": 0
+        }
+    ]
+}

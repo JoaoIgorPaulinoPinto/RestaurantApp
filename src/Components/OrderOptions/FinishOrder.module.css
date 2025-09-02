@@ -13,15 +13,6 @@
 
 }
 
-.ShoppingCart {
-    background-color: var(--accent-color);
-    color: var(--background-color);
-    padding: 10px;
-    border-radius: 10px;
-    flex-shrink: 0;
-    /* não encolhe */
-}
-
 .totalPreco {
     font-weight: bold;
     font-size: 1.2rem;
@@ -29,16 +20,6 @@
     color: var(--foreground-color);
     white-space: nowrap;
     /* evita quebrar em várias linhas e gerar overflow */
-}
-
-
-.ShoppingCart {
-    background-color: var(--accent-color);
-    color: var(--background-color);
-    padding: 10px;
-    border-radius: 10px;
-    flex-shrink: 0;
-    /* não encolhe */
 }
 
 .totalPreco {
