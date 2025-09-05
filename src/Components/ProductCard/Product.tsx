@@ -1,7 +1,7 @@
 'use client';
 
 import { Noto_Serif } from 'next/font/google';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '/src/Components/ProductCard/Product.module.css';
 import Image from 'next/image';
 
@@ -12,6 +12,7 @@ export interface Produto {
     categoria: string;
     descricao: string;
     quantidade: number; // agora vem da página
+    observacao?: string;
 }
 
 interface ProductCardProps {
@@ -24,19 +25,18 @@ const notoserif = Noto_Serif({ subsets: ['latin'], weight: '400' });
 export default function ProductCard({ produto, onQuantidadeChange }: ProductCardProps) {
 
     // inicializa o estado com a quantidade que vem da prop
-    const [quantidade, setQuantidade] = useState(produto.quantidade);
+    const [quantidade, setQuantidade] = useState(0);
     const aumentar = () => {
-        const novaQtd = quantidade + 1;
-        setQuantidade(novaQtd);
-        onQuantidadeChange?.(novaQtd); // avisa a página
+        onQuantidadeChange?.(produto.quantidade + 1);
     };
 
     const diminuir = () => {
-        if (quantidade <= 0) return;
-        const novaQtd = quantidade - 1;
-        setQuantidade(novaQtd);
-        onQuantidadeChange?.(novaQtd); // avisa a página
+        if (produto.quantidade <= 0) return;
+        onQuantidadeChange?.(produto.quantidade - 1);
     };
+    useEffect(() => {
+        setQuantidade(produto.quantidade ?? 0);
+    }, [produto.quantidade]);
 
     return (
         <div className={styles.cardapioItem}>

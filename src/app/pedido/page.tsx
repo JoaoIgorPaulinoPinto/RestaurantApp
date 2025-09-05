@@ -1,29 +1,34 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import styles from './Pedido.module.css';
 import { Produto } from '/src/Components/ProductCard/Product';
+import styles from './Pedido.module.css';
+import { useRouter } from 'next/navigation';
+
+interface respoApiProd {
+    idProduto: number;
+    quantidade: number;
+    obs: string;
+}
+interface apiRespo {
+    respoApiProd: respoApiProd[];
+    pagamentoMeth: string;
+    endereco: string;
+    coordenadas: { lat: number; lon: number };
+}
+
 export default function PedidoPage() {
-    const router = useRouter();
+    const [isEntrega, setIsEntrega] = useState(false);
+    const [metodoPagamento, setMetodoPagamento] = useState("");
     const [produtos, setProdutos] = useState<Produto[]>([]);
     const [total, setTotal] = useState(0);
 
-    // Buscar carrinho da API
-    const loadCarrinho = async () => {
-        try {
-            const res = await fetch('/src/api/carrinho');
-            if (!res.ok) throw new Error('Erro ao buscar carrinho');
-            const data = await res.json();
-            setProdutos(data.Produtos || []);
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    const router = useRouter();
 
-    // Calcular total sempre que produtos mudarem
+
     useEffect(() => {
-        loadCarrinho();
+        const carrinhoLocal = localStorage.getItem("carrinho");
+        if (carrinhoLocal) setProdutos(JSON.parse(carrinhoLocal));
     }, []);
 
     useEffect(() => {
@@ -34,10 +39,25 @@ export default function PedidoPage() {
         setTotal(totalCalc);
     }, [produtos]);
 
-    // Finalizar pedido (apenas console.log)
     const handleFinalizar = () => {
-        console.log('Pedido finalizado!', produtos);
+        const novoResp: respoApiProd[] = produtos.map((p) => ({
+            idProduto: p.id,
+            quantidade: p.quantidade,
+            obs: p.observacao || ""
+        }));
+
+        const rp: apiRespo = {
+            respoApiProd: novoResp,
+            pagamentoMeth: metodoPagamento,
+            endereco: isEntrega ? "Endereço do Usuario" : "Retirada no Local",
+            coordenadas: { lat: 0, lon: 0 },
+        };
+
+        console.log('Pedido finalizado!', rp);
         alert('Pedido finalizado! Veja o console.');
+        localStorage.removeItem("carrinho");
+        router.push("/"); // redireciona para a página Pedido
+
     };
 
     return (
@@ -49,37 +69,118 @@ export default function PedidoPage() {
             <div className={styles.body}>
                 <table className={styles.table}>
                     <thead>
-                        <tr className={styles.tableh}>
-                            <th className={styles.tableh_prodName}>Produto</th>
-                            <th className={styles.tableh_prodQuant}>Quantidade</th>
-                            <th className={styles.tableh_prodPrice}>Preço</th>
-                            <th className={styles.tableh_prodObs}>Obs</th>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço</th>
+                            <th>Observação</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {produtos.map((p, i) => (
                             <tr key={i}>
                                 <td>{p.name}</td>
-                                <td>{p.quantidade}</td>
+                                <td>{p.quantidade}x</td>
                                 <td>R${(p.preco * (p.quantidade || 0)).toFixed(2)}</td>
-                                <td>Sem observações por enquanto</td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        placeholder="Adicionar observação"
+                                        value={p.observacao || ""}
+                                        onChange={(e) => {
+                                            const novosProdutos = [...produtos];
+                                            novosProdutos[i] = { ...novosProdutos[i], observacao: e.target.value };
+                                            setProdutos(novosProdutos);
+                                        }}
+                                    />
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
 
-            <div className={styles.footer}>
-                <span>Frete: R$4,00</span>
-                <span>Total: R${(total + 4).toFixed(2)}</span>
-                <button className={styles.btn_finalizar} onClick={handleFinalizar}>
-                    Finalizar
-                </button>
-                <button className={styles.btn_cancelar} onClick={loadCarrinho}>
-                    Cancelar
-                </button>
+            {/* Pagamento e entrega lado a lado */}
+            <div className={styles.optionsContainer}>
+                <div className={styles.optionColumn}>
+                    <h3>Entrega / Retirada</h3>
+                    <label>
+                        <input
+                            type="radio"
+                            name="entrega"
+                            value="Retirada"
+                            checked={!isEntrega}
+                            onChange={() => setIsEntrega(false)}
+                        />
+                        Retirada no Local
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="entrega"
+                            value="Entrega"
+                            checked={isEntrega}
+                            onChange={() => setIsEntrega(true)}
+                        />
+                        Entrega
+                    </label>
+                    {isEntrega && (
+                        <>
+                            <label className={styles.checkboxEndereco}>
+                                <input type="checkbox" /> Meu endereço
+                            </label>
+                            <label className={styles.buttonEndereco}>
+                                <button>Adicionar Endereço</button>
+                            </label>
+                        </>
+
+                    )}
+                </div>
+
+                <div className={styles.optionColumn}>
+                    <h3>Pagamento</h3>
+                    <label>
+                        <input
+                            type="radio"
+                            name="pagamento"
+                            value="pix"
+                            checked={metodoPagamento === "pix"}
+                            onChange={(e) => setMetodoPagamento(e.target.value)}
+                        />
+                        Pix
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="pagamento"
+                            value="dinheiro"
+                            checked={metodoPagamento === "dinheiro"}
+                            onChange={(e) => setMetodoPagamento(e.target.value)}
+                        />
+                        Dinheiro
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="pagamento"
+                            value="cartao"
+                            checked={metodoPagamento === "cartao"}
+                            onChange={(e) => setMetodoPagamento(e.target.value)}
+                        />
+                        Cartão
+                    </label>
+                </div>
             </div>
+
+            {/* Frete e total */}
+            <div className={styles.summary}>
+                <span>Frete: <strong>R$4,00</strong></span>
+                <span>Total: <strong>R${(total + 4).toFixed(2)}</strong></span>
+            </div>
+
+            <button className={styles.btn_finalizar} onClick={handleFinalizar}>
+                Finalizar Pedido
+            </button>
         </div>
     );
 }

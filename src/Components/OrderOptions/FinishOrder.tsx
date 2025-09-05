@@ -1,5 +1,5 @@
 import styles from './FinishOrder.module.css';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface FinishOrderProps {
     total: number;
@@ -7,9 +7,13 @@ interface FinishOrderProps {
 }
 
 export default function FinishOrder({ total, children }: FinishOrderProps) {
+    const [t, setTotal] = useState(total);
+    useEffect(() => {
+        setTotal(total)
+    }, [total]);
     return (
         <div className={styles.actions}>
-            <span className={styles.totalPreco}>R${total.toFixed(2)}</span>
+            <span className={styles.totalPreco}>R${t.toFixed(2)}</span>
             {children} {/* Aqui fica o botão ou outros elementos */}
         </div>
     );

@@ -1,4 +1,5 @@
 'use client'
+import { ShoppingCart } from 'lucide-react';
 import styles from './FinishOrderButton.module.css';
 import { useRouter } from 'next/navigation';
 
@@ -15,8 +16,8 @@ export default function FinishOrderButton({ onClick }: FinishOrderButtonProps) {
     }
 
     return (
-        <button className={styles.ShoppingCart} onClick={handleClick}>
-            Finalizar Pedido
+        <button className={styles.container} onClick={handleClick}>
+            <ShoppingCart className={styles.ShoppingCart} />
         </button>
     );
 }

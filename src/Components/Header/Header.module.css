@@ -1,51 +1,46 @@
 .header {
     display: flex;
-    /* inline-flex removido */
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    /* melhor para distribuir itens */
-    padding: 0 20px;
-    height: 60px;
-    /* aumenta para caber botão e título */
+    padding: var(--size-8);
+    height: auto;
     width: 100%;
     position: relative;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    gap: var(--size-15);
+    background: var(--background-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.7);
     box-sizing: border-box;
+    overflow-x: hidden;
+
 }
 
 .title {
-    font-size: 1.5rem;
-    /* responsivo */
+    font-size: var(--text-l);
     font-weight: bold;
-    color: #000;
+    color: var(--text-colo-1);
 }
 
-.toggleOptions {
+.settings,
+.user {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 @media (max-width: 600px) {
     .header {
-        padding: 0 10px;
-        height: 50px;
+        padding: 0 var(--size-3);
+        height: var(--size-15);
     }
 
     .title {
-        font-size: 1.2rem;
+        font-size: var(--text-m);
     }
 
     .toggleOptions {
-        width: 35px;
-        height: 35px;
+        width: var(--size-9);
+        height: var(--size-9);
     }
 }

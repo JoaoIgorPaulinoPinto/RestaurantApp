@@ -1,31 +1,30 @@
 .carouselOption {
     cursor: pointer;
-    min-width: 50px;
-    min-height: 50px;
-    padding: 10px;
-
-    /* largura mínima do card */
+    min-width: var(--size-12);
+    /* 50px aproximado */
+    min-height: var(--size-12);
+    /* 50px aproximado */
+    padding: var(--size-5);
     flex: 0 0 auto;
     /* evita que encolha */
-    color: var(--foreground-color);
-    border-radius: 10px;
+    color: var(--text-color-2);
+    /* foreground-color */
+    border-radius: var(--border-radius-m);
+    /* 10px */
     text-align: center;
-    cursor: pointer;
     transition: transform 0.3s;
 }
 
 .selectedCarouselOption {
     background-color: var(--background-color);
     cursor: pointer;
-    min-width: 50px;
-    padding: 5px;
-    /* largura mínima do card */
+    min-width: var(--size-12);
+    padding: var(--size-3);
+    /* 5px aproximado */
     flex: 0 0 auto;
     /* evita que encolha */
-    color: var(--foreground-color);
-    border-radius: 10px;
+    color: var(--text-color-2);
+    border-radius: var(--border-radius-m);
     text-align: center;
-    cursor: pointer;
     transition: transform 0.3s;
-
 }

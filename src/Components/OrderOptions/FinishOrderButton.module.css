@@ -1,9 +1,21 @@
 .ShoppingCart {
-    background-color: var(--accent-color);
-    color: var(--background-color);
-    padding: 10px;
-    border-radius: 10px;
-    flex-shrink: 0;
     border: none;
-    /* não encolhe */
+}
+
+.container {
+    flex-shrink: 0;
+    background-color: var(--accent-color);
+    color: var(--text-on-accent, #fff);
+    /* usa token ou fallback branco */
+    padding: var(--size-5);
+    margin: 0;
+    border: none;
+    border-radius: var(--border-radius-sl);
+    transition: transform var(--transition-fast, 0.3s);
+}
+
+.container:hover {
+    cursor: pointer;
+    background-color: var(--accent-color-hover);
+    box-shadow: var(--box-shadow);
 }

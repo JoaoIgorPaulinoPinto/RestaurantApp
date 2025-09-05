@@ -1,85 +1,174 @@
 .content {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-
+    gap: var(--size-5);
+    padding: var(--size-5);
 }
 
+/* Header */
 .header {
-    box-shadow: var(--box-shadow);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--primary-color);
-    padding: 10px;
-
     justify-content: center;
     align-items: center;
     width: 100%;
+    font-size: var(--text-ml);
+    font-weight: 600;
+    text-align: center;
 }
 
+/* Tabela do carrinho */
 .body {
-    box-shadow: var(--box-shadow);
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--primary-color);
-
+    overflow-x: auto;
+    /* scroll apenas na tabela */
 }
 
-.body td tr {
-    font-size: small;
-    flex: 1;
-    margin: 0;
-
-    border: 1px solid #000;
+.body table {
+    text-align: center;
+    font-size: var(--text-m);
+    width: 100%;
     border-collapse: collapse;
-    padding: 8px;
+    min-width: 400px;
+}
+
+.body td,
+.body th {
+    padding: var(--size-3);
+    border-bottom: var(--def-border);
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: var(--tertiary-color);
 }
 
-/* FOOTER */
+.td_obs input {
+    padding: var(--size-3);
+    font-size: var(--text-m);
+    border-radius: var(--border-radius-s);
+    border: var(--def-border);
+    width: 100%;
+}
 
-.footer {
-
+/* Pagamento e entrega juntos */
+.optionsContainer {
+    display: flex;
+    gap: var(--size-5);
+    flex-wrap: wrap;
+    padding: var(--size-4);
+    border-radius: var(--border-radius-m);
     box-shadow: var(--box-shadow);
-    border-radius: 10px;
+    background-color: var(--primary-color);
+}
+
+.optionColumn {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: var(--primary-color);
-    padding: 10px;
-    gap: 10px;
+    gap: var(--size-2);
 }
 
-.btn_finalizar {
-    border-radius: 10px;
+.optionColumn h3 {
+    font-size: var(--text-m);
+    margin-bottom: var(--size-2);
+}
+
+.optionColumn label {
     display: flex;
-    width: 100%;
-    height: 50px;
-    background-color: var(--blue-color);
-    color: white;
     align-items: center;
+    gap: var(--size-2);
+    font-size: var(--text-m);
     cursor: pointer;
-    transition: transform 0.3s;
-    justify-content: center;
 }
 
-/* .btn_finalizar .btn_cancelar :hover {} */
-
-.btn_cancelar {
-    cursor: pointer;
-    transition: transform 0.3s;
-    border-radius: 10px;
+/* Checkbox e botão de endereço alinhados */
+.checkboxEndereco {
     display: flex;
-    width: 100%;
-    height: 50px;
+    align-items: center;
+    gap: var(--size-2);
+    margin-top: var(--size-2);
+}
+
+.buttonEndereco button {
+    margin-left: auto;
+    padding: var(--size-3) var(--size-5);
+    border-radius: var(--border-radius-sl);
+    border: var(--def-border);
     background-color: var(--accent-color);
-    color: white;
-    align-items: center;
+    color: var(--text-color-1);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.buttonEndereco button:hover {
+    background-color: var(--accent-color-hover);
+    transform: scale(1.05);
+}
+
+/* Frete e total */
+.summary {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--size-4);
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-m);
+    box-shadow: var(--box-shadow);
+    font-size: var(--text-ml);
+    /* maior fonte */
+    font-weight: 600;
+    margin-bottom: var(--size-4);
+}
+
+.summary span {
+    color: var(--text-color-2);
+}
+
+/* Botão finalizar */
+.btn_finalizar {
+    border-radius: var(--border-radius-m);
+    width: 100%;
+    height: var(--size-20);
+    color: var(--text-color-1);
+    display: flex;
     justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    font-weight: 600;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    margin-bottom: var(--size-3);
+}
+
+.btn_finalizar:hover {
+    background-color: var(--accent-color-hover);
+    transform: scale(1.03);
+}
+
+/* Responsividade celular */
+@media (max-width: 640px) {
+    .body table {
+        font-size: var(--text-sl);
+    }
+
+    .body td,
+    .body th {
+        padding: var(--size-2);
+    }
+
+    .optionsContainer {
+        flex-direction: column;
+    }
+
+    .summary {
+        flex-direction: column;
+        gap: var(--size-2);
+        font-size: var(--text-m);
+    }
+
+    .optionColumn label {
+        font-size: var(--text-sl);
+    }
+
+    .buttonEndereco button {
+        padding: var(--size-2) var(--size-4);
+        font-size: var(--text-sm);
+    }
 }

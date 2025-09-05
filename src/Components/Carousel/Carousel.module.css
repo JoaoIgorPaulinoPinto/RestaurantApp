@@ -3,7 +3,7 @@
     overflow-x: auto;
     /* scroll horizontal */
     scroll-behavior: smooth;
-    margin-bottom: 20px;
+    margin-bottom: var(--size-10);
     justify-content: center;
     background-color: var(--secondery-color);
     align-items: center;
@@ -12,11 +12,10 @@
 
 .carousel {
     display: flex;
-    gap: 10px;
+    gap: var(--size-5);
     align-items: center;
     justify-content: center;
 }
-
 
 .carouselItem:hover {
     transform: scale(1.05);
@@ -28,6 +27,6 @@
 
 @media (max-width: 600px) {
     .carousel {
-        justify-content: start;
+        justify-content: flex-start;
     }
 }

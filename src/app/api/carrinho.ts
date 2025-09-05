@@ -5,10 +5,9 @@ import path from 'path';
 import { Produtos } from '/src/data/Produtos.json';
 import { Produto } from '../Components/ProductCard/Product';
 
-// /app/api/carrinho/route.ts
 import { NextResponse } from 'next/server';
 
-let carrinho: Produto[] = []; // armazenamento em memória
+let carrinho: Produto[] = [];
 
 export async function GET() {
     return NextResponse.json({ Produtos: carrinho });
@@ -33,7 +32,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
             res.status(500).json({ error: 'Erro ao ler o carrinho' });
         }
     } else if (req.method === 'POST') {
-        // Atualizar o carrinho
         try {
             const novosProdutos: Produto[] = req.body.produtos;
             fs.writeFileSync(FILE_PATH, JSON.stringify({ Produtos: novosProdutos }, null, 2));
