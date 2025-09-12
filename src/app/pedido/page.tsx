@@ -1,10 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { Produto } from '/src/Components/ProductCard/Product';
+import { Produto } from '../../Components/HomePage/ProductCard/Product';
 import styles from './Pedido.module.css';
 import { useRouter } from 'next/navigation';
-
+import OrderTable from '../../Components/FinishingOrderPage/Table/OrderTable';
+import OrderOptionsSetting from '/src/Components/FinishingOrderPage/OrderOptionsSetting/OrderOptionsSetting'
+import Sumary from '/src/Components/FinishingOrderPage/Sumary/Sumary';
 interface respoApiProd {
     idProduto: number;
     quantidade: number;
@@ -62,121 +64,21 @@ export default function PedidoPage() {
 
     return (
         <div className={styles.content}>
-            <div className={styles.header}>
+            {/* <div className={styles.header}>
                 <span>Finalização do Pedido</span>
-            </div>
+            </div> */}
 
-            <div className={styles.body}>
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Quantidade</th>
-                            <th>Preço</th>
-                            <th>Observação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {produtos.map((p, i) => (
-                            <tr key={i}>
-                                <td>{p.name}</td>
-                                <td>{p.quantidade}x</td>
-                                <td>R${(p.preco * (p.quantidade || 0)).toFixed(2)}</td>
-                                <td>
-                                    <input
-                                        type="text"
-                                        placeholder="Adicionar observação"
-                                        value={p.observacao || ""}
-                                        onChange={(e) => {
-                                            const novosProdutos = [...produtos];
-                                            novosProdutos[i] = { ...novosProdutos[i], observacao: e.target.value };
-                                            setProdutos(novosProdutos);
-                                        }}
-                                    />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <OrderTable produtos={produtos} setProdutos={setProdutos} />
 
-            {/* Pagamento e entrega lado a lado */}
-            <div className={styles.optionsContainer}>
-                <div className={styles.optionColumn}>
-                    <h3>Entrega / Retirada</h3>
-                    <label>
-                        <input
-                            type="radio"
-                            name="entrega"
-                            value="Retirada"
-                            checked={!isEntrega}
-                            onChange={() => setIsEntrega(false)}
-                        />
-                        Retirada no Local
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="entrega"
-                            value="Entrega"
-                            checked={isEntrega}
-                            onChange={() => setIsEntrega(true)}
-                        />
-                        Entrega
-                    </label>
-                    {isEntrega && (
-                        <>
-                            <label className={styles.checkboxEndereco}>
-                                <input type="checkbox" /> Meu endereço
-                            </label>
-                            <label className={styles.buttonEndereco}>
-                                <button>Adicionar Endereço</button>
-                            </label>
-                        </>
 
-                    )}
-                </div>
+            <OrderOptionsSetting
+                isEntrega={isEntrega}
+                setIsEntrega={setIsEntrega}
+                metodoPagamento={metodoPagamento}
+                setMetodoPagamento={setMetodoPagamento}
+            />
 
-                <div className={styles.optionColumn}>
-                    <h3>Pagamento</h3>
-                    <label>
-                        <input
-                            type="radio"
-                            name="pagamento"
-                            value="pix"
-                            checked={metodoPagamento === "pix"}
-                            onChange={(e) => setMetodoPagamento(e.target.value)}
-                        />
-                        Pix
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="pagamento"
-                            value="dinheiro"
-                            checked={metodoPagamento === "dinheiro"}
-                            onChange={(e) => setMetodoPagamento(e.target.value)}
-                        />
-                        Dinheiro
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="pagamento"
-                            value="cartao"
-                            checked={metodoPagamento === "cartao"}
-                            onChange={(e) => setMetodoPagamento(e.target.value)}
-                        />
-                        Cartão
-                    </label>
-                </div>
-            </div>
-
-            {/* Frete e total */}
-            <div className={styles.summary}>
-                <span>Frete: <strong>R$4,00</strong></span>
-                <span>Total: <strong>R${(total + 4).toFixed(2)}</strong></span>
-            </div>
+            <Sumary total={total} frete={4} />
 
             <button className={styles.btn_finalizar} onClick={handleFinalizar}>
                 Finalizar Pedido

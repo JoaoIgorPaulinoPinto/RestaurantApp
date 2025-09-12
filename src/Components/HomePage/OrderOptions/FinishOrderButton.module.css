@@ -5,7 +5,7 @@
 .container {
     flex-shrink: 0;
     background-color: var(--accent-color);
-    color: var(--text-on-accent, #fff);
+    color: var(--text-color-1);
     /* usa token ou fallback branco */
     padding: var(--size-5);
     margin: 0;

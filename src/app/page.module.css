@@ -40,3 +40,45 @@
   width: 90%;
   gap: 10px;
 }
+
+.btn_limparselecao {
+
+  background-color: transparent;
+  color: var(--accent-color);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius-m);
+  text-decoration: underline;
+
+  padding: var(--size-3) var(--size-6);
+  font-size: var(--text-m);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin: 10px 10% 10px 10px;
+  align-self: flex-end;
+  /* encosta no canto direito dentro de um flex */
+}
+
+.btn_limparselecao:hover {
+  background-color: var(--accent-color);
+  color: var(--text-color-1);
+}
+
+@media (max-width: 640px) {
+  .btn_limparselecao {
+
+    background-color: transparent;
+    color: var(--accent-color);
+    font-weight: 300;
+    border: none;
+    border-radius: var(--border-radius-sl);
+    text-decoration: underline;
+    padding: var(--size-1) var(--size-3);
+    font-size: var(--text-sl);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin: 10px 10% 10px 10px;
+    align-self: flex-end;
+    /* encosta no canto direito dentro de um flex */
+  }
+}

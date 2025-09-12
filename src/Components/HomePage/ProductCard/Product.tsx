@@ -2,7 +2,7 @@
 
 import { Noto_Serif } from 'next/font/google';
 import { useEffect, useState } from 'react';
-import styles from '/src/Components/ProductCard/Product.module.css';
+import styles from './Product.module.css';
 import Image from 'next/image';
 
 export interface Produto {

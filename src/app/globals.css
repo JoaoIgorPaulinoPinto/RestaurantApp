@@ -33,22 +33,20 @@ body {
   }
 }
 
-
 :root {
+  /* ===== Tema claro (default) ===== */
   --background-color: #fff;
   --primary-color: #f5f5f5;
   --tertiary-color: #e9e9e9;
-  --secondery-color: #f2f2f2;
   --secondary-color: #f5f5f5;
-
   --accent-color: crimson;
+  --accent-2-color: #14dc6e;
   --accent-color-hover: rgb(250, 20, 70);
-
   --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  --def-border: solid rgba(0, 0, 0, 0.100) 1px;
-
-  --text-color-1: #fff;
-  --text-color-2: #1e1e1e;
+  --def-border: solid rgba(0, 0, 0, 0.1) 1px;
+  --text-color-1: #1e1e1e;
+  --text-color-2: #fff;
+  /* ...demais variáveis */
 
   --text-s: 0.2rem;
   --text-sl: 0.8rem;
@@ -72,7 +70,7 @@ body {
 
   --border-radius-full: 100%;
 
-
+  /* sizes */
   --size-1: 2px;
   --size-2: 4px;
   --size-3: 6px;
@@ -93,4 +91,42 @@ body {
   --size-18: 36px;
   --size-19: 38px;
   --size-20: 40px;
+  --size-21: 42px;
+  --size-22: 44px;
+  --size-23: 46px;
+  --size-24: 48px;
+  --size-25: 50px;
+  --size-26: 52px;
+  --size-27: 54px;
+  --size-28: 56px;
+  --size-29: 58px;
+  --size-30: 60px;
+  --size-31: 62px;
+  --size-32: 64px;
+  --size-33: 66px;
+  --size-34: 68px;
+  --size-35: 70px;
+  --size-36: 72px;
+  --size-37: 74px;
+  --size-38: 76px;
+  --size-39: 78px;
+  --size-40: 80px;
+}
+
+/* ===== Tema escuro ===== */
+[data-theme="dark"] {
+  --background-color: #121212;
+  --primary-color: #1d1d1d;
+  --tertiary-color: #2a2a2a;
+  --secondary-color: #1a1a1a;
+
+  --accent-color: #ff4d6d;
+  --accent-2-color: #2ee38f;
+  --accent-color-hover: #ff6b81;
+
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  --def-border: solid rgba(255, 255, 255, 0.15) 1px;
+
+  --text-color-1: #f5f5f5;
+  --text-color-2: #e0e0e0;
 }

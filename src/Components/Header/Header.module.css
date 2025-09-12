@@ -13,7 +13,18 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.7);
     box-sizing: border-box;
     overflow-x: hidden;
+    color: var(--text-color-1)
+}
 
+.header span {
+    cursor: pointer;
+}
+
+.leftSide {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--size-15);
 }
 
 .title {
@@ -22,8 +33,10 @@
     color: var(--text-colo-1);
 }
 
+.title,
 .settings,
 .user {
+
     background-color: transparent;
     border: none;
     cursor: pointer;

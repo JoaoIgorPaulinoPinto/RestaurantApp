@@ -9,6 +9,8 @@
     /* 12px */
     align-items: flex-start;
     transition: background 0.2s ease;
+    color: var(--text-color-1);
+
 }
 
 .cardapioFoto {
@@ -42,13 +44,13 @@
     font-weight: 600;
     font-size: var(--text-l);
     /* 15px ≈ 1rem */
-    color: var(--text-color-2);
+    color: var(--text-color-1);
 }
 
 .cardapioPreco {
     font-weight: bold;
     font-size: var(--text-l);
-    color: var(--accent-color);
+    color: var(--accent-2-color);
     /* substitui blue-color inexistente */
     white-space: nowrap;
 }
@@ -80,11 +82,11 @@
     padding: var(--size-2) var(--size-3);
     /* 4px 6px */
     border-radius: var(--border-radius-sl);
-    background-color: var(--secondary-color);
+    background-color: var(--secondery-color);
 }
 
 .qtdButton {
-    background-color: var(--text-color-2);
+    background-color: var(--background-color);
     /* foreground-color → text-color-2 */
     color: var(--text-color-1);
     border: none;
@@ -93,13 +95,11 @@
     border-radius: var(--border-radius-s);
     font-weight: bold;
     cursor: pointer;
+    box-shadow: var(--box-shadow);
 }
 
 /* ------------------------ Responsividade Celular ------------------------ */
 @media (max-width: 600px) {
-
-
-
     .actions {
         margin: var(--size-5) 5%;
         /* 10px */

@@ -1,0 +1,64 @@
+.config {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-6);
+}
+
+.config button {
+    border-radius: var(--border-radius-sl);
+}
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: var(--size-25);
+    /* 50px */
+    height: var(--size-13);
+    /* 26px */
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--tertiary-color);
+    /* cinza do tema */
+    border-radius: var(--border-radius-xl);
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: var(--size-10);
+    /* 20px */
+    width: var(--size-10);
+    left: var(--size-2);
+    /* 4px */
+    bottom: var(--size-2);
+    background-color: var(--text-color-1);
+    /* branco */
+    border-radius: var(--border-radius-full);
+    transition: .4s;
+}
+
+.toggle input:checked+.slider {
+    background-color: var(--accent-color);
+    /* verde */
+}
+
+.toggle input:checked+.slider:before {
+    transform: translateX(var(--size-12));
+    /* 24px */
+}

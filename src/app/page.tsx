@@ -2,23 +2,26 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
-import ProductCard from '../Components/ProductCard/Product';
-import Banner from '../Components/Banner/Banner';
-import Carousel from '../Components/Carousel/Carousel';
-import CarouselOption from '../Components/Carousel/CarouselOption';
-import FinishOrder from '../Components/OrderOptions/FinishOrder';
-import FinishOrderButton from '../Components/OrderOptions/FinishOrderButton';
+import ProductCard from '../Components/HomePage/ProductCard/Product';
+import Banner from '../Components/HomePage/Banner/Banner';
+import Carousel from '../Components/HomePage/Carousel/Carousel';
+import CarouselOption from '../Components/HomePage/Carousel/CarouselOption';
+import FinishOrder from '../Components/HomePage/OrderOptions/FinishOrder';
+import FinishOrderButton from '../Components/HomePage/OrderOptions/FinishOrderButton';
 import { Beer, CakeSlice, Hamburger, Milk, Pizza, Popsicle, Utensils, Wine } from 'lucide-react';
 import produtosData from '/src/data/Produtos.json';
-import { Produto } from '../Components/ProductCard/Product';
+import { Produto } from '../Components/HomePage/ProductCard/Product';
 
 export default function Home() {
   const router = useRouter();
   const [hydrated, setHydrated] = useState(false);
 
-  // Marca quando o cliente estiver pronto
-  useEffect(() => setHydrated(true), []);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
+
+  // ------ PRODUTO -------------//
   // Inicializa mapa de produtos
   const [produtosMap, setProdutosMap] = useState<Record<number, Produto>>(() => {
     const carrinhoSalvo: Produto[] =
@@ -59,6 +62,9 @@ export default function Home() {
 
   const [selectedFilter, setSelectedFilter] = useState('');
 
+
+  // ------ AÇÕES -------------//
+
   const handleFinishOrder = () => {
     localStorage.setItem("carrinho", JSON.stringify(produtosSelecionados));
     router.push("/pedido");
@@ -87,38 +93,62 @@ export default function Home() {
     return Object.values(produtosMap).filter(p => p.categoria === selectedFilter);
   }, [produtosMap, selectedFilter]);
 
-  // Evita renderização até estar hidratado (cliente pronto)
-  if (!hydrated) return null;
+  // ------ Outro -------------//
+
+  const limparSelecao = () => {
+    // limpa o localStorage
+    localStorage.setItem("carrinho", JSON.stringify([]));
+
+    // reseta o estado (quantidade = 0 para todos os produtos)
+    setProdutosMap(prev => {
+      const novoMap: Record<number, Produto> = {};
+      Object.values(prev).forEach(p => {
+        novoMap[p.id] = { ...p, quantidade: 0 };
+      });
+      return novoMap;
+    });
+  };
 
   return (
     <div className={styles.background}>
       <Banner />
 
-      <FinishOrder total={total}>
-        <FinishOrderButton onClick={handleFinishOrder} />
-      </FinishOrder>
+      {hydrated && (
+        <>
+          <FinishOrder total={total}>
+            <FinishOrderButton onClick={handleFinishOrder} />
+          </FinishOrder>
 
-      <Carousel>
-        {options.map((option, i) => (
-          <CarouselOption
-            key={i}
-            selected={selectedFilter === option.name}
-            onClick={() => handleSelectFilter(option.name)}
-          >
-            {option.icon}
-          </CarouselOption>
-        ))}
-      </Carousel>
+          <Carousel>
+            {options.map((option, i) => (
+              <CarouselOption
+                key={i}
+                selected={selectedFilter === option.name}
+                onClick={() => handleSelectFilter(option.name)}
+              >
+                {option.icon}
+              </CarouselOption>
+            ))}
+          </Carousel>
 
-      <div className={styles.cardapio}>
-        {produtosFiltrados.map(product => (
-          <ProductCard
-            key={product.id}
-            produto={product}
-            onQuantidadeChange={(q) => handleQuantidadeChange(product, q)}
-          />
-        ))}
-      </div>
+          {produtosSelecionados.length > 0 && (
+            <button className={styles.btn_limparselecao} onClick={limparSelecao}>
+              Limpar seleção
+            </button>
+          )}
+
+
+          <div className={styles.cardapio}>
+            {produtosFiltrados.map(product => (
+              <ProductCard
+                key={product.id}
+                produto={product}
+                onQuantidadeChange={(q) => handleQuantidadeChange(product, q)}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

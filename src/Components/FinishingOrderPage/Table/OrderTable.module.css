@@ -1,0 +1,30 @@
+.table {
+    text-align: center;
+    font-size: var(--text-m);
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 400px;
+}
+
+.table td,
+.table th {
+    padding: var(--size-3);
+    border-bottom: var(--def-border);
+}
+
+.table tr:nth-child(even) {
+    background-color: var(--tertiary-color);
+}
+
+.td_obs input {
+    padding: var(--size-3);
+    font-size: var(--text-m);
+    border-radius: var(--border-radius-s);
+    border: var(--def-border);
+    width: 100%;
+}
+
+.body {
+    overflow-x: auto;
+    /* scroll apenas na tabela */
+}
