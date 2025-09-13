@@ -2,10 +2,9 @@
 import { Check, Pencil } from 'lucide-react'
 import styles from './perfil.module.css'
 import Container from '/src/Components/Container/Container'
-import Image from 'next/image';
 import { useState } from 'react';
 
-export default function perfil() {
+export default function Perfil() {
     const [editando, setEditando] = useState(false);
     const [nome, setNome] = useState('');
     const [numero, setNumero] = useState('');

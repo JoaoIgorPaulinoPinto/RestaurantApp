@@ -1,7 +1,5 @@
-import { Pencil } from 'lucide-react'
 import styles from './perfil.module.css'
 import Container from '/src/Components/Container/Container'
-import Image from 'next/image';
 
 export default function perfil() {
     return <>

@@ -1,5 +1,5 @@
 'use client';
-import { ChevronLeft, Menu, Settings, UserRound } from 'lucide-react';
+import { ChevronLeft, Settings, UserRound } from 'lucide-react';
 import styles from './Header.module.css';
 import { Noto_Serif } from 'next/font/google';
 import { useState, useEffect } from 'react';
