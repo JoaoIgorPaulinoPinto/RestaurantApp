@@ -1,0 +1,24 @@
+.btn_final {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: var(--size-4);
+    color: var(--text-color-2);
+
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: var(--size-40);
+    height: var(--size-20);
+    background-color: var(--accent-color);
+    color: var(--text-color-1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text-color-2);
+}

@@ -16,6 +16,7 @@ export default function RootLayout({
     <html lang="pt-br" data-theme="light">
       <body
         style={{
+          backgroundColor: "var(--background-color)",
           fontFamily: "Arial, sans-serif",
           width: "100%",
           height: "100%",
@@ -28,6 +29,6 @@ export default function RootLayout({
         <Header />
         {children}
       </body>
-    </html>
+    </html >
   );
 }

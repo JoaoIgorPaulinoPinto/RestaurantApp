@@ -23,8 +23,8 @@ export default function PedidoPage() {
     const [isEntrega, setIsEntrega] = useState(false);
     const [metodoPagamento, setMetodoPagamento] = useState("");
     const [produtos, setProdutos] = useState<Produto[]>([]);
+    const [endereco, setEndereco] = useState('');
     const [total, setTotal] = useState(0);
-
     const router = useRouter();
 
 
@@ -51,7 +51,7 @@ export default function PedidoPage() {
         const rp: apiRespo = {
             respoApiProd: novoResp,
             pagamentoMeth: metodoPagamento,
-            endereco: isEntrega ? "Endereço do Usuario" : "Retirada no Local",
+            endereco: isEntrega ? endereco.toString() : "Retirada no Local",
             coordenadas: { lat: 0, lon: 0 },
         };
 
@@ -76,6 +76,7 @@ export default function PedidoPage() {
                 setIsEntrega={setIsEntrega}
                 metodoPagamento={metodoPagamento}
                 setMetodoPagamento={setMetodoPagamento}
+                setEndereco={setEndereco}
             />
 
             <Sumary total={total} frete={4} />

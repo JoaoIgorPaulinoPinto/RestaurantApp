@@ -1,0 +1,115 @@
+.enderecoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: var(--size-6);
+    margin: var(--size-2);
+}
+
+.enderecoContainer span {
+    text-wrap-mode: nowrap;
+    font-size: small;
+    width: auto;
+}
+
+.enderecoInputWrapper {
+    display: flex;
+    gap: var(--size-2);
+    width: 100%;
+    align-items: center;
+}
+
+.enderecoInputWrapper input {
+    flex: 1;
+}
+
+
+
+.dropdown {
+    background-color: var(--primary-color);
+    border-bottom: var(--def-border);
+    padding: var(--size-3);
+    border-radius: var(--size-2);
+    width: 100%;
+    color: var(--text-color-1);
+
+}
+
+/* Botões */
+.btn_adicionarEndereco {
+    padding: 4px 8px;
+    background-color: var(--accent-color);
+    color: var(--text-color-2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: var(--size-2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteButton {
+    background: transparent;
+    color: var(--accent-color);
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: var(--size-3);
+}
+
+/* Dropdown customizado */
+.customDropdown {
+    position: relative;
+    width: 100%;
+}
+
+.customDropdownSelected {
+    padding: var(--size-3);
+    border: var(--def-border);
+    border-radius: var(--size-2);
+    background-color: var(--primary-color);
+    cursor: pointer;
+    width: 100%;
+    color: var(--text-color-1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.customDropdownList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: var(--def-border);
+    border-radius: var(--size-2);
+    background-color: var(--primary-color);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 10;
+}
+
+.customDropdownItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--size-3);
+    cursor: pointer;
+    border-bottom: var(--def-border);
+}
+
+.customDropdownItem:last-child {
+    border-bottom: none;
+}
+
+.customDropdownItem:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.enderecoItemText {
+    flex: 1;
+}

@@ -1,14 +1,39 @@
+import { useEffect, useState } from 'react';
 import Container from '../../Container/Container';
 import styles from './OrderOptionsSetting.module.css'
+import EnderecoDropdown from '../../Perfil/EnderecoDropdown/EnderecoDropdown';
+import { stringify } from 'querystring';
 
 interface FinishOrderOptionsSettingProps {
     isEntrega: boolean;
     setIsEntrega: React.Dispatch<React.SetStateAction<boolean>>;
     metodoPagamento: string;
     setMetodoPagamento: React.Dispatch<React.SetStateAction<string>>;
+    setEndereco: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function FinishOrderOptionsSetting(props: FinishOrderOptionsSettingProps) {
+
+
+    const [meuEndereco, setMeuEndereco] = useState(false);
+    const [addEndereco, setaddEndereco] = useState(true);
+    const [enderecos, setEnderecos] = useState<string[]>([]); // lista de endereços extras
+    const [enderecoSelecionado, setEnderecoSelecionado] = useState(''); // endereço selecionado pelo dropdown
+    const [enderecoPerfil, setEnderecoPerfil] = useState();
+    useEffect(() => {
+        const savedData = localStorage.getItem('perfilUsuario');
+        if (savedData) {
+            const perfil = JSON.parse(savedData);
+            if (perfil.endereco) {
+                props.setEndereco(perfil.endereco);
+                setEnderecoPerfil(perfil.enderecoSelecionado);
+                setMeuEndereco(true); // marca checkbox se há endereço salvo
+            } else {
+                setMeuEndereco(false); // não marca se não há endereço
+            }
+        }
+    }, []);
+
     return (
         <Container>
             <div className={styles.optionColumn}>
@@ -35,14 +60,49 @@ export default function FinishOrderOptionsSetting(props: FinishOrderOptionsSetti
                 </label>
                 {props.isEntrega && (
                     <>
+                        {/* Checkbox Meu Endereço */}
                         <label className={styles.checkboxEndereco}>
-                            <input type="checkbox" /> Meu endereço
+                            <input
+                                type="checkbox"
+                                checked={meuEndereco}
+                                onChange={(e) => {
+                                    setMeuEndereco(e.target.checked);
+                                    if (e.target.checked) {
+                                        // usa endereço do perfil
+                                        props.setEndereco(enderecoSelecionado);
+                                    } else {
+                                        // limpa para adicionar outro
+                                        props.setEndereco('');
+                                    }
+                                }}
+                            />
+                            Meu endereço
                         </label>
-                        <label className={styles.buttonEndereco}>
-                            <button>Adicionar Endereço</button>
-                        </label>
+                        {
+                            meuEndereco ?
+                                <label className={styles.meuEnderecoDisplay}>
+
+                                    {enderecoPerfil}
+
+                                </label> : ''
+                        }
+
+                        {/* Dropdown aparece apenas se "Meu endereço" estiver desmarcado */}
+                        {!meuEndereco && (
+                            <EnderecoDropdown
+                                editing={true}
+                                endereco={enderecos}
+                                setEndereco={setEnderecos}
+                                enderecoSelecionado={enderecoSelecionado}
+                                setEnderecoSelecionado={(e) => {
+                                    setEnderecoSelecionado(e);
+                                    props.setEndereco(e); // atualiza endereço do pedido
+                                }}
+                            />
+                        )}
                     </>
                 )}
+
             </div>
 
             <div className={styles.optionColumn}>

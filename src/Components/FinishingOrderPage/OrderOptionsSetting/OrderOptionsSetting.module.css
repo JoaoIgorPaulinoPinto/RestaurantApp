@@ -26,6 +26,11 @@
     margin: var(--size-2);
 }
 
+.meuEnderecoDisplay {
+    font-size: var(--size-2);
+    font-style: italic;
+}
+
 .buttonEndereco {
     width: fit-content;
     margin: var(--size-5);
