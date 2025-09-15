@@ -36,10 +36,10 @@
 .title,
 .settings,
 .user {
-
     background-color: transparent;
     border: none;
     cursor: pointer;
+    color: var(--text-colo-1);
 }
 
 @media (max-width: 600px) {

@@ -17,7 +17,7 @@ export default function FinishOrderButton({ onClick }: FinishOrderButtonProps) {
 
     return (
         <button className={styles.container} onClick={handleClick}>
-            <ShoppingCart className={styles.ShoppingCart} />
+            <ShoppingCart color='white' className={styles.ShoppingCart} />
         </button>
     );
 }

@@ -74,6 +74,8 @@
 
 /* -------------------- Controles de Quantidade -------------------- */
 .quantidadeControls {
+    background-color: var(--secondary-color);
+
     display: flex;
     align-items: center;
     gap: var(--size-3);
@@ -82,11 +84,10 @@
     padding: var(--size-2) var(--size-3);
     /* 4px 6px */
     border-radius: var(--border-radius-sl);
-    background-color: var(--secondery-color);
 }
 
 .qtdButton {
-    background-color: var(--background-color);
+    background-color: var(--secondary-color);
     /* foreground-color → text-color-2 */
     color: var(--text-color-1);
     border: none;

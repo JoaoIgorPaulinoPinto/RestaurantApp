@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { Produto } from '../../Components/HomePage/ProductCard/Product';
+import { Produto } from '/src/Components/HomePage/ProductCard/Product'
 import styles from './Pedido.module.css';
 import { useRouter } from 'next/navigation';
-import OrderTable from '../../Components/FinishingOrderPage/Table/OrderTable';
+import OrderTable from '/src/Components/FinishingOrderPage/Table/OrderTable'
 import OrderOptionsSetting from '/src/Components/FinishingOrderPage/OrderOptionsSetting/OrderOptionsSetting'
 import Sumary from '/src/Components/FinishingOrderPage/Sumary/Sumary';
 interface respoApiProd {

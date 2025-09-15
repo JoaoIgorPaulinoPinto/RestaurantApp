@@ -16,7 +16,8 @@
 }
 
 .selectedCarouselOption {
-    background-color: var(--background-color);
+    background-color: var(--primary-color);
+    border: var(--def-border);
     cursor: pointer;
     min-width: var(--size-12);
     padding: var(--size-3);
