@@ -32,7 +32,10 @@ export default function Home() {
     const map: Record<number, Produto> = {};
     produtosData.Produtos.forEach(p => {
       const itemSalvo = carrinhoSalvo.find(c => c.id === p.id);
-      map[p.id] = itemSalvo ? { ...p, quantidade: itemSalvo.quantidade } : { ...p, quantidade: 0 };
+
+      map[p.id] = itemSalvo
+        ? { ...p, quantidade: itemSalvo.quantidade, observacao: itemSalvo.observacao || "" }
+        : { ...p, quantidade: 0, observacao: "" };
     });
     return map;
   });
@@ -59,7 +62,15 @@ export default function Home() {
     { icon: <Milk size={24} color='crimson' />, name: 'Bebidas' },
     { icon: <Wine size={24} color='crimson' />, name: 'Vinhos' },
   ], []);
-
+  useEffect(() => {
+    if (hydrated) {
+      const produtosComObs = produtosSelecionados.map(p => ({
+        ...p,
+        observacao: p.observacao ?? ""  // garante que nunca seja undefined
+      }));
+      localStorage.setItem("carrinho", JSON.stringify(produtosComObs));
+    }
+  }, [produtosSelecionados, hydrated]);
   const [selectedFilter, setSelectedFilter] = useState('');
 
 

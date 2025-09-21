@@ -12,7 +12,7 @@ export interface Produto {
     categoria: string;
     descricao: string;
     quantidade: number; // quantidade inicial
-    observacao?: string;
+    observacao: string;
 }
 
 interface ProductCardProps {

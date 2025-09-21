@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import OrderTable from '/src/Components/FinishingOrderPage/Table/OrderTable'
 import OrderOptionsSetting from '/src/Components/FinishingOrderPage/OrderOptionsSetting/OrderOptionsSetting'
 import Sumary from '/src/Components/FinishingOrderPage/Sumary/Sumary';
+import Container from '/src/Components/Container/Container';
 interface respoApiProd {
     idProduto: number;
     quantidade: number;
@@ -67,9 +68,12 @@ export default function PedidoPage() {
             {/* <div className={styles.header}>
                 <span>Finalização do Pedido</span>
             </div> */}
+            <Container>
+                <OrderTable produtos={produtos} setProdutos={setProdutos} />
 
-            <OrderTable produtos={produtos} setProdutos={setProdutos} />
+            </Container>
 
+            <Sumary total={total} frete={4} />
 
             <OrderOptionsSetting
                 isEntrega={isEntrega}
@@ -79,7 +83,6 @@ export default function PedidoPage() {
                 setEndereco={setEndereco}
             />
 
-            <Sumary total={total} frete={4} />
 
             <button className={styles.btn_finalizar} onClick={handleFinalizar}>
                 Finalizar Pedido

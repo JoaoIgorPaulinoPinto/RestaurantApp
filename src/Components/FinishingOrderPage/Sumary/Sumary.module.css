@@ -1,15 +1,15 @@
 /* Frete e total */
 .summary {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    justify-content: left;
+    flex-direction: row;
     padding: var(--size-4);
-    font-size: var(--text-ml);
+    font-size: var(--text-sl);
     /* maior fonte */
     font-weight: 600;
-    margin-bottom: var(--size-4);
+    gap: 50px;
 }
 
 .summary span {
-    color: var(--text-color-2);
+    color: var(--text-color-1);
 }
