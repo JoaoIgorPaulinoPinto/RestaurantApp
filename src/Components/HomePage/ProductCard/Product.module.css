@@ -2,190 +2,114 @@
 .cardapioItem {
     display: flex;
     width: 100%;
-    padding: var(--size-6);
-    /* 12px */
+    padding: var(--size-2);
     border-bottom: var(--def-border);
     gap: var(--size-6);
-    /* 12px */
-    align-items: flex-start;
-    transition: background 0.2s ease;
     color: var(--text-color-1);
-
+    align-items: flex-start;
 }
 
 .cardapioFoto {
-    width: 120px;
+    min-width: 100px;
+    /* largura fixa para a foto */
     height: 100px;
     background-color: var(--accent-color);
     border-radius: var(--border-radius-sl);
-    /* 8px */
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
 }
 
-.cardapioTextContent {
+/* Coluna da direita */
+.cardapioRight {
     display: flex;
     flex-direction: column;
+    /* empilha preço, descrição e controles */
+    justify-content: space-between;
     flex: 1;
-    justify-content: space-between;
-}
-
-.cardapioInfoTop {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    gap: var(--size-5);
-    /* 10px */
-}
-
-.cardapioNome {
-    font-weight: 600;
-    font-size: var(--text-l);
-    /* 15px ≈ 1rem */
-    color: var(--text-color-1);
 }
 
 .cardapioPreco {
     font-weight: bold;
     font-size: var(--text-l);
     color: var(--accent-2-color);
-    /* substitui blue-color inexistente */
-    white-space: nowrap;
-}
-
-.cardapioInfoBottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: var(--size-3);
-    /* 6px */
+    margin-bottom: var(--size-3);
 }
 
 .cardapioDescricao {
     font-size: var(--text-m);
-    /* 13px */
-    font-style: italic;
-    opacity: 0.85;
+    margin-bottom: var(--size-3);
     line-height: 1.4;
-    flex: 1;
+    opacity: 0.9;
 }
 
 /* -------------------- Controles de Quantidade -------------------- */
-.quantidadeControls {
-    background-color: var(--secondary-color);
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    /* todo conteúdo da footer vai pra direita */
+    height: fit-content;
+}
 
+/* Ajuste no bloco de controles */
+.quantidadeControls {
+    background-color: var(--primary-color);
     display: flex;
     align-items: center;
+
+    /* --- Novo --- */
+    justify-content: flex-end;
+    /* força os botões para a direita */
+    margin-left: auto;
+    /* empurra para a direita dentro do pai */
+    width: fit-content;
+
     gap: var(--size-3);
-    /* 6px */
     border: var(--def-border);
     padding: var(--size-2) var(--size-3);
-    /* 4px 6px */
     border-radius: var(--border-radius-sl);
 }
 
 .qtdButton {
-    background-color: var(--secondary-color);
-    /* foreground-color → text-color-2 */
+    background-color: var(--primary-color);
     color: var(--text-color-1);
     border: none;
     padding: var(--size-3) var(--size-6);
-    /* 6px 12px */
     border-radius: var(--border-radius-s);
     font-weight: bold;
     cursor: pointer;
     box-shadow: var(--box-shadow);
 }
 
+.quantidadeDisplay {
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
 /* ------------------------ Responsividade Celular ------------------------ */
-@media (max-width: 600px) {
-    .actions {
-        margin: var(--size-5) 5%;
-        /* 10px */
-        width: 90%;
-        padding: var(--size-2) var(--size-4);
-
-        font-size: var(--text-sl);
-        /* 8px 12px */
-    }
-
-    .qtdButton {
-        background-color: var(--text-color-2);
-        /* foreground-color → text-color-2 */
-        color: var(--text-color-1);
-        border: none;
-        padding: var(--size-3) var(--size-6);
-        /* 6px 12px */
-        border-radius: var(--border-radius-s);
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .quantidadeControls {
-        display: flex;
-        align-items: center;
-        gap: var(--size-3);
-        /* 6px */
-        border: var(--def-border);
-        padding: var(--size-2) var(--size-3);
-        /* 4px 6px */
-        border-radius: var(--border-radius-sl);
-        background-color: var(--secondary-color);
-    }
-
-    .cardapioNome {
-        font-weight: 600;
-        font-size: var(--text-m);
-        /* 15px ≈ 1rem */
-        color: var(--text-color-2);
-    }
-
-    .cardapioItem {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--size-4);
-        /* 8px */
-        padding: var(--size-5);
-        /* 10px */
-    }
-
-    .cardapioFoto {
-        width: 100%;
-        height: 120px;
-    }
-
-    .cardapioInfoTop {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--size-2);
-        /* 4px */
-    }
+@media (max-width: 700px) {
 
     .cardapioPreco {
         font-size: var(--text-m);
     }
 
     .cardapioDescricao {
-        width: 100%;
-        font-size: var(--text-sl);
+        font-size: var(--text-sm);
         line-height: 1.3;
     }
 
-    .cardapioInfoBottom {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--size-2);
-        /* 6px */
+    .qtdButton {
+        padding: var(--size-2) var(--size-4);
+    }
+
+    .quantidadeDisplay {
+        font-size: var(--text-sl);
     }
 
     .quantidadeControls {
-        display: flex;
-        justify-content: flex-end;
+
         margin-top: var(--size-3);
-        /* 6px */
     }
 }

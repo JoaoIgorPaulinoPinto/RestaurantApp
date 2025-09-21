@@ -1,6 +1,5 @@
 .actions {
     color: var(--text-color-1);
-
     position: sticky;
     top: 0;
     z-index: 100;
@@ -9,6 +8,7 @@
     justify-content: space-between;
     padding: var(--size-2) var(--size-3);
     background-color: var(--background-color);
+
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     width: 100%;
     box-sizing: border-box;

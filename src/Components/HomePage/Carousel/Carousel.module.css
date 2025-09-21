@@ -7,7 +7,8 @@
     justify-content: center;
     background-color: var(--secondery-color);
     align-items: center;
-    border: var(--def-border);
+    border-bottom: var(--def-border);
+    border-top: var(--def-border);
 }
 
 .carousel {
