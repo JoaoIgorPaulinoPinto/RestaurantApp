@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import ProductCard, { Produto } from '../../HomePage/ProductCard/Product';
-import styles from './OrderTable.module.css'
-import { Check, Edit, Pencil, Save } from 'lucide-react';
+'use client'
 
-import LocalStorageManager from '/src/Services/LocalStorageManager'
+import { useEffect, useRef, useState } from 'react';
+import { Produto } from '../../HomePage/ProductCard/Product';
+import styles from './OrderTable.module.css';
+import { Check, Pencil } from 'lucide-react';
+import LocalStorageManager from '/src/Services/LocalStorageManager';
+
 interface TableProps {
     produtos: Produto[];
     setProdutos: React.Dispatch<React.SetStateAction<Produto[]>>;
@@ -34,13 +36,12 @@ export default function FinishingOrderTable({ produtos, setProdutos }: TableProp
     const saveChanges = () => {
         const carrinhoComObservacao = produtos.map(p => ({
             ...p,
-            observacao: p.observacao ?? "" // garante que não seja undefined
+            observacao: p.observacao ?? ""
         }));
         LocalStorageManager.SaveData("carrinho", carrinhoComObservacao);
     };
 
     useEffect(() => {
-        // se editingIndex mudou de um número para null, salva alterações
         if (prevEditingIndex.current !== null && editingIndex === null) {
             saveChanges();
         }
@@ -50,49 +51,52 @@ export default function FinishingOrderTable({ produtos, setProdutos }: TableProp
     return (
         <div className={styles.body}>
             <table className={styles.table}>
-                <thead>
+                <thead className={styles.thead}>
                     <tr>
+                        <th>Editar</th>
                         <th>Produto</th>
                         <th>Quantidade</th>
                         <th>Preço</th>
                         <th>Observação</th>
-                        <th>Editar</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     {produtos.map((p, i) => (
                         <tr key={p.id ?? i}>
+                            <td style={{ alignItems: "center" }} >
+                                <button onClick={() => setEditingIndex(editingIndex === i ? null : i)} className={styles.editButton}>
+                                    {editingIndex === i ? <Check size={16} /> : <Pencil size={16} />}
+                                </button>
+                            </td>
+
                             <td data-label="Produto">{p.name}</td>
 
                             <td data-label="Quantidade">
-                                {editingIndex == null ? (
-                                    // Apenas mostra quantidade quando está editando outra linha
-                                    <span>{p.quantidade}x</span>
-                                ) : (
-                                    // Controles de aumentar/diminuir
+                                {editingIndex === i ? (
                                     <div className={styles.quantidadeControls}>
                                         <button onClick={() => diminuir(i)} className={styles.qtdButton}>-</button>
                                         <span className={styles.quantidadeDisplay}>{p.quantidade}</span>
                                         <button onClick={() => aumentar(i)} className={styles.qtdButton}>+</button>
                                     </div>
+                                ) : (
+                                    <span>{p.quantidade}x</span>
                                 )}
                             </td>
-
 
                             <td data-label="Preço">
                                 {p.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                             </td>
-                            {editingIndex === i ? (
-                                <td className="td_obs" data-label="Observação">
+
+                            <td data-label="Observação">
+                                {editingIndex === i ? (
                                     <input
                                         type="text"
                                         placeholder="Adicionar observação"
-                                        value={p.observacao || ""}
+                                        value={p.observacao ?? ""}
                                         onKeyDown={(e) => {
                                             if (e.key === "Enter") {
-                                                e.preventDefault();            // evita quebra de linha
-                                                setEditingIndex(null);         // “salvar” e sair do modo edição
+                                                e.preventDefault();
+                                                setEditingIndex(null);
                                             }
                                         }}
                                         onChange={(e) => {
@@ -102,18 +106,12 @@ export default function FinishingOrderTable({ produtos, setProdutos }: TableProp
                                                 )
                                             );
                                         }}
+                                        className={styles.obsInput}
                                     />
-
-                                </td>
-                            ) : (
-                                <td data-label="Observação">{p.observacao ?? ""}</td>
-                            )
-                            }
-                            <div className={styles.btn_command}>
-                                <button onClick={() => setEditingIndex(editingIndex === i ? null : i)}>
-                                    {editingIndex === i ? <Check size={10} /> : <Pencil size={10} />}
-                                </button>
-                            </div>
+                                ) : (
+                                    p.observacao ?? ""
+                                )}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

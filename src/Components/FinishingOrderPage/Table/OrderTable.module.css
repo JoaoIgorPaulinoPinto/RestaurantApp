@@ -1,104 +1,104 @@
+/* =======================
+   Tabela padrão
+======================= */
 .table {
     width: 100%;
     border-collapse: collapse;
-    text-align: center;
-    font-size: var(--text-m);
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    /* elimina espaçamento entre células/bordas */
-}
-
-.table td,
-.table th {
-    padding: 10px;
-    text-wrap: nowrap;
     text-align: start;
     font-size: var(--text-m);
+    color: var(--text-color-1);
 }
+
+.table th,
+.table td {
+    padding: 10px;
+    font-size: var(--text-m);
+    line-height: 1.4;
+    border-bottom: 1px dotted var(--def-border-color, #ccc);
+}
+
+
 
 .table th {
     font-size: var(--text-l);
+    font-weight: 600;
+    border: none;
 }
 
 .table td {
-    /* zera o espaço inferior para a borda encostar no texto */
     padding-bottom: 0;
     margin: 0;
-
-    border-bottom: 1px dotted var(--def-border-color, #ccc);
-    line-height: 1;
-    /* opcional: deixa a linha mais “justa” */
 }
 
-
-/* Input da observação */
-.td_obs input {
-    padding: var(--size-3);
-    font-size: var(--text-m);
+/* =======================
+   Input da observação
+======================= */
+.td_obs input,
+.obsInput {
+    height: fit-content;
+    align-items: center;
+    font-size: var(--text-sm);
     border-radius: var(--border-radius-s);
-    border: var(--def-border);
+    border: none;
+    border-bottom: var(--def-border);
     width: 100%;
+    background-color: transparent;
+
 }
 
-/* Container da tabela com rolagem horizontal em telas médias */
+/* =======================
+   Container da tabela com scroll horizontal
+======================= */
 .body {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
 
-.btn_command {
+/* =======================
+   Botões de ação
+======================= */
+.editButton {
     display: flex;
-    /* garante que justify-content funcione */
     justify-content: flex-end;
-    /* alinha os botões à direita */
     gap: var(--size-2);
-    /* espaço horizontal entre botões, se houver mais de um */
-    /* opcional: um pouco de respiro vertical */
     margin-top: var(--size-2);
     margin-bottom: 0;
 }
 
-.btn_command button {
+.editButton {
     border: var(--def-border);
+    margin: var(--size-2);
     border-radius: var(--border-radius-s);
     color: var(--accent-color);
     background: transparent;
-    /* área de clique confortável */
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
-    /* animação suave */
 }
 
-/* Efeito hover/foco para melhor feedback */
-.btn_command button:hover,
-.btn_command button:focus {
+.editButton button:hover,
+.editButton button:focus {
     background-color: var(--accent-color);
     color: #fff;
-    /* ou outra cor de contraste */
 }
 
-/* Contêiner dos controles de quantidade */
+/* =======================
+   Controles de quantidade
+======================= */
 .quantidadeControls {
     display: flex;
     justify-content: flex-end;
-    /* força o bloco para a direita */
     align-items: center;
     gap: var(--size-1);
-    /* espaço pequeno entre botões */
     padding: 2px 4px;
-    /* padding compacto */
     border-radius: var(--border-radius-s);
     background-color: var(--primary-color);
-    width: fit-content;
     border: var(--def-border);
-    /* REMOVIDO margin: 0 auto; */
+    width: fit-content;
 }
 
-/* Botões +/– bem pequenos */
 .qtdButton {
+    color: var(--text-color-1);
+
     padding: 2px 6px;
     background-color: var(--primary-color);
     border: none;
@@ -109,7 +109,6 @@
     font-size: var(--text-sm);
 }
 
-/* Número da quantidade menor e centralizado */
 .quantidadeDisplay {
     font-weight: bold;
     min-width: 16px;
@@ -117,9 +116,9 @@
     font-size: var(--text-sm);
 }
 
-
-
-/* Ajuste de fonte em telas ≤700px */
+/* =======================
+   Responsividade para tablets e mobile
+======================= */
 @media (max-width: 700px) {
 
     .table td,
@@ -129,47 +128,5 @@
 
     .table th {
         font-size: var(--text-m);
-    }
-}
-
-/* Layout "card" para telas muito pequenas (≤600px) */
-@media (max-width: 700px) {
-
-    .table,
-    .table thead,
-    .table tbody,
-    .table th,
-    .table td,
-    .table tr {
-        display: block;
-    }
-
-    .table thead {
-        display: none;
-        /* escondemos o cabeçalho */
-    }
-
-
-    .table tr {
-        margin-bottom: 1rem;
-        border-radius: var(--border-radius-s);
-        padding: 0.75rem;
-        background: var(--surface-color, #fff);
-    }
-
-    .table td {
-        display: flex;
-        justify-content: space-between;
-        text-align: left;
-        padding: 0.4rem 0;
-        font-size: var(--text-sm);
-        word-wrap: break-word;
-    }
-
-    /* rótulo do campo vem do atributo data-label */
-    .table td::before {
-        content: attr(data-label);
-        font-weight: 600;
-        margin-right: 0.5rem;
     }
 }

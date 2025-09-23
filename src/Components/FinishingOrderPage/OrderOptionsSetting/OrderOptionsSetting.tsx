@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Container from '../../Container/Container';
 import styles from './OrderOptionsSetting.module.css'
 import EnderecoDropdown from '../../Perfil/EnderecoDropdown/EnderecoDropdown';
-import { stringify } from 'querystring';
+import { Endereco } from '../../../Models/Endereco';
 
 interface FinishOrderOptionsSettingProps {
     isEntrega: boolean;
@@ -13,13 +13,11 @@ interface FinishOrderOptionsSettingProps {
 }
 
 export default function FinishOrderOptionsSetting(props: FinishOrderOptionsSettingProps) {
-
-
     const [meuEndereco, setMeuEndereco] = useState(false);
     const [addEndereco, setaddEndereco] = useState(true);
     const [enderecos, setEnderecos] = useState<string[]>([]); // lista de endereços extras
     const [enderecoSelecionado, setEnderecoSelecionado] = useState(''); // endereço selecionado pelo dropdown
-    const [enderecoPerfil, setEnderecoPerfil] = useState();
+    const [enderecoPerfil, setEnderecoPerfil] = useState<Endereco | undefined>();
     useEffect(() => {
         const savedData = localStorage.getItem('perfilUsuario');
         if (savedData) {
@@ -34,8 +32,12 @@ export default function FinishOrderOptionsSetting(props: FinishOrderOptionsSetti
         }
     }, []);
 
+    const formattedEndereco = enderecoPerfil ?
+        `${enderecoPerfil.rua}, ${enderecoPerfil.numero} - ${enderecoPerfil.bairro}, ${enderecoPerfil.cidade} - ${enderecoPerfil.estado}`
+        : '';
+
     return (
-        <Container>
+        <>
             <div className={styles.optionColumn}>
                 <h3>Entrega / Retirada</h3>
                 <label>
@@ -82,7 +84,7 @@ export default function FinishOrderOptionsSetting(props: FinishOrderOptionsSetti
                             meuEndereco ?
                                 <label className={styles.meuEnderecoDisplay}>
 
-                                    {enderecoPerfil}
+                                    {formattedEndereco}
 
                                 </label> : ''
                         }
@@ -138,7 +140,6 @@ export default function FinishOrderOptionsSetting(props: FinishOrderOptionsSetti
                     Cartão
                 </label>
             </div>
-        </Container>
-
+        </>
     );
 }
