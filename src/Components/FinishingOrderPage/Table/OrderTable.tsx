@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Produto } from '../../HomePage/ProductCard/Product';
 import styles from './OrderTable.module.css';
 import { Check, Pencil } from 'lucide-react';
-import LocalStorageManager from '/src/Services/LocalStorageManager';
+// import LocalStorageManager from '/src/Services/LocalStorageManager';
 
 interface TableProps {
     produtos: Produto[];
@@ -33,15 +33,17 @@ export default function FinishingOrderTable({ produtos, setProdutos }: TableProp
         );
     };
 
-    const saveChanges = () => {
-        const carrinhoComObservacao = produtos.map(p => ({
-            ...p,
-            observacao: p.observacao ?? ""
-        }));
-        LocalStorageManager.SaveData("carrinho", carrinhoComObservacao);
-    };
 
     useEffect(() => {
+
+        const saveChanges = () => {
+            const carrinhoComObservacao = produtos.map(p => ({
+                ...p,
+                observacao: p.observacao ?? ""
+            }));
+            localStorage.setItem("perfilUsuario", JSON.stringify(carrinhoComObservacao));
+        };
+
         if (prevEditingIndex.current !== null && editingIndex === null) {
             saveChanges();
         }

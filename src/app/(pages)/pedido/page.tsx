@@ -1,5 +1,4 @@
-'use client'
-
+'use client';
 import { useEffect, useState } from 'react';
 import { Produto } from '/src/Components/HomePage/ProductCard/Product'
 import styles from './Pedido.module.css';
@@ -8,6 +7,9 @@ import OrderTable from '/src/Components/FinishingOrderPage/Table/OrderTable'
 import OrderOptionsSetting from '/src/Components/FinishingOrderPage/OrderOptionsSetting/OrderOptionsSetting'
 import Sumary from '/src/Components/FinishingOrderPage/Sumary/Sumary';
 import Container from '/src/Components/Container/Container';
+
+import { Endereco as Endereco } from '/src/Models/Endereco';
+
 interface respoApiProd {
     idProduto: number;
     quantidade: number;
@@ -16,32 +18,33 @@ interface respoApiProd {
 interface apiRespo {
     respoApiProd: respoApiProd[];
     pagamentoMeth: string;
-    endereco: string;
-    coordenadas: { lat: number; lon: number };
+    endereco: Endereco | string;
+    // coordenadas: { lat: number; lon: number };
 }
 
 export default function PedidoPage() {
     const [isEntrega, setIsEntrega] = useState(false);
     const [metodoPagamento, setMetodoPagamento] = useState("");
-    const [produtos, setProdutos] = useState<Produto[]>([]);
-    const [endereco, setEndereco] = useState('');
-    const [total, setTotal] = useState(0);
+    const [endereco, setEndereco] = useState<Endereco | null>(null);
+    const total = 0; // substituir pelo cálculo real do total
     const router = useRouter();
-
+    const [produtos, setProdutos] = useState<Produto[]>([]);
 
     useEffect(() => {
-        const carrinhoLocal = localStorage.getItem("carrinho");
-        if (carrinhoLocal) setProdutos(JSON.parse(carrinhoLocal));
+        const carrinho = localStorage.getItem("carrinho");
+        if (carrinho) setProdutos(JSON.parse(carrinho));
     }, []);
-
     useEffect(() => {
-        const totalCalc = produtos.reduce(
-            (acc, p) => acc + (p.quantidade || 0) * p.preco,
-            0
-        );
-        setTotal(totalCalc);
+        if (typeof window !== "undefined") {
+            const perfilUsuario = localStorage.getItem("perfilUsuario");
+            if (perfilUsuario) setEndereco(JSON.parse(perfilUsuario).enderecoSelecionado || null);
+        }
+    }, []);
+    useEffect(() => {
+        if (produtos.length > 0) {
+            localStorage.setItem("carrinho", JSON.stringify(produtos));
+        }
     }, [produtos]);
-
     const handleFinalizar = () => {
         const novoResp: respoApiProd[] = produtos.map((p) => ({
             idProduto: p.id,
@@ -52,13 +55,13 @@ export default function PedidoPage() {
         const rp: apiRespo = {
             respoApiProd: novoResp,
             pagamentoMeth: metodoPagamento,
-            endereco: isEntrega ? endereco.toString() : "Retirada no Local",
-            coordenadas: { lat: 0, lon: 0 },
+            endereco: isEntrega ? endereco ?? '' : "Retirada no Local",
+            // coordenadas: { lat: 0, lon: 0 },
         };
 
+        localStorage.getItem("carrinho") && localStorage.removeItem("carrinho");
         console.log('Pedido finalizado!', rp);
         alert('Pedido finalizado! Veja o console.');
-        localStorage.removeItem("carrinho");
         router.push("/"); // redireciona para a página Pedido
 
     };

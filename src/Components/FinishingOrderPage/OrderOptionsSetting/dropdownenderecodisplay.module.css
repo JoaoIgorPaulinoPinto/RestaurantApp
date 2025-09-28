@@ -1,0 +1,36 @@
+.header {
+    width: 100%;
+    padding: var(--size-3);
+    font-size: var(--text-m);
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+.dropdown {
+    background-color: var(--primary-color);
+    color: var(--text-color-1);
+    border: var(--def-border);
+    border-radius: var(--border-radius-s);
+}
+
+.options {
+
+    border: var(--def-border);
+    max-height: 150px;
+    /* Altura máxima do dropdown */
+    overflow-y: auto;
+    /* Adiciona barra de rolagem se necessário */
+    border-top: var(--def-border);
+
+}
+
+.dropdown option {
+    border-radius: var(--border-radius-s);
+
+    background-color: var(--primary-color);
+    color: var(--text-color-1);
+    padding: var(--size-3);
+    cursor: pointer;
+}
