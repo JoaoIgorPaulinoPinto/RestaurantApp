@@ -1,9 +1,11 @@
-import styles from './Banner.module.css'
+import styles from './banner.module.css'
 import Image from 'next/image';
 import { Open_Sans } from 'next/font/google';
 
 const opensans = Open_Sans({ subsets: ['latin'] });
 
+
+//banner da pagina inicial
 export default function Banner() {
     return (
         <div className={`${styles.bannerContainer} ${opensans.className}`}>

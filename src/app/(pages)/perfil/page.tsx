@@ -1,14 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Container from '/src/Components/Container/Container';
-import UserInfoField from '../../../Components/Perfil/UserInfoField/UserInfoField';
-import ActionButtons from '../../../Components/Perfil/ActionsButton/ActionsButtons';
+import Container from '../../../Components/Container/container';
+import UserInfoField from '../../../Components/UserInfoField/user-input-field';
+import ActionButtons from '../../../Components/ActionsButton/actions-button';
 import styles from './perfil.module.css';
-import DropdownEnderecosDisplay from '/src/Components/FinishingOrderPage/OrderOptionsSetting/DropdownenderecosDisplay';
+import DropdownEnderecosDisplay from '../../../Components/Dropdown/dropdown-endereco-display';
 import { Endereco } from '/src/Models/Endereco';
 // import { SetUsuarioData, GetUsuarioData } from '/src/Services/LocalStorageManager';
-import FormEndereco from '/src/Components/Perfil/EnderecoDropdown/endereco-form';
+import FormEndereco from '../../../Components/EnderecoForm/endereco-form';
 
 export default function Perfil() {
     const [editando, setEditando] = useState(false);
@@ -60,7 +60,7 @@ export default function Perfil() {
                 <UserInfoField label="Telefone" value={numero} editing={editando} onChange={setNumero} />
 
                 {/* Exibição de endereços */}
-                <DropdownEnderecosDisplay enderecos={enderecosPerfil} />
+                <DropdownEnderecosDisplay saveOnProfile={true} setEnderecoSelecionado={setEnderecoSelecionado} enderecos={enderecosPerfil} />
 
                 {/* Formulário para adicionar/editar endereço */}
                 {editando && (

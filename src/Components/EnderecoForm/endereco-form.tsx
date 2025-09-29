@@ -1,4 +1,3 @@
-// import { GetUsuarioData } from "/src/Services/LocalStorageManager";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,7 +7,6 @@ interface Props {
     setEnderecoSelecionado: (e: Endereco) => void;
 }
 
-// Interface do formulário
 import { Endereco, Endereco as EnderecoForm } from "/src/Models/Endereco";
 const enderecoSchema = yup.object({
     numero: yup
@@ -21,6 +19,9 @@ const enderecoSchema = yup.object({
     cidade: yup.string().required("Cidade é obrigatória"),
     estado: yup.string().required("Estado é obrigatório"),
 });
+
+
+//formulário para adicionar novo endereço ao perfil do usuário  
 export default function FormEndereco({
     setEnderecoSelecionado,
 }: Props) {
@@ -42,8 +43,8 @@ export default function FormEndereco({
             cidade: data.cidade,
             estado: data.estado,
         };
-        const endereco = localStorage.getItem("perfilUsuario") || "{}";
-        const enderecos = localStorage.getItem("perfilUsuario") ? JSON.parse(endereco).endereco : [];
+        const perfildata = localStorage.getItem("perfilUsuario") || "{}";
+        const enderecos = localStorage.getItem("perfilUsuario") ? JSON.parse(perfildata).endereco : [];
 
         // Adiciona o novo endereço ao array existente
         const novosEnderecos = [...enderecos, novo];

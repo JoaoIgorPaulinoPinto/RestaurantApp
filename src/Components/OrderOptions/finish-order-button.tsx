@@ -1,12 +1,12 @@
 'use client'
 import { ShoppingCart } from 'lucide-react';
-import styles from './FinishOrderButton.module.css';
+import styles from './finish-order-button.module.css';
 import { useRouter } from 'next/navigation';
 
 interface FinishOrderButtonProps {
     onClick?: () => void;
 }
-
+//botão flutuante para finalizar o pedido e ir para a página de confirmação
 export default function FinishOrderButton({ onClick }: FinishOrderButtonProps) {
     const router = useRouter();
 

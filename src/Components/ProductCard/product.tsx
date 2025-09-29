@@ -2,18 +2,9 @@
 
 import { Noto_Serif } from 'next/font/google';
 import { useEffect, useState } from 'react';
-import styles from './Product.module.css';
+import styles from './product.module.css';
 import Image from 'next/image';
-
-export interface Produto {
-    id: number;
-    name: string;
-    preco: number;
-    categoria: string;
-    descricao: string;
-    quantidade: number; // quantidade inicial
-    observacao: string;
-}
+import { Produto } from '/src/Models/Produto';
 
 interface ProductCardProps {
     produto: Produto;
@@ -22,6 +13,8 @@ interface ProductCardProps {
 
 const notoserif = Noto_Serif({ subsets: ['latin'], weight: '400' });
 
+
+//componente que exibe as informações do produto e permite ajustar a quantidade
 export default function ProductCard({ produto, onQuantidadeChange }: ProductCardProps) {
     const [quantidade, setQuantidade] = useState(0);
 

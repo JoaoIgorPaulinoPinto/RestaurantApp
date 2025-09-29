@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
-import { Produto } from '../../HomePage/ProductCard/Product';
+import { Produto } from '/src/Models/Produto';
 import styles from './OrderTable.module.css';
 import { Check, Pencil } from 'lucide-react';
 // import LocalStorageManager from '/src/Services/LocalStorageManager';

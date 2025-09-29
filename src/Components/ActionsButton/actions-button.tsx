@@ -1,5 +1,5 @@
 import { Check, Pencil, X as XIcon } from 'lucide-react';
-import styles from './ActionsButton.module.css';
+import styles from './actions-button.module.css';
 
 interface Props {
     editing: boolean;
@@ -7,7 +7,7 @@ interface Props {
     onCancel: () => void;
     onEdit: () => void;
 }
-
+//botao para editar e salvar os dados do perfil
 export default function ActionButtons({ editing, onSave, onCancel, onEdit }: Props) {
     return (
         <div className={styles.btn_final}>

@@ -1,6 +1,6 @@
 'use client';
 import { ChevronLeft, Settings, UserRound } from 'lucide-react';
-import styles from './Header.module.css';
+import styles from './header.module.css';
 import { Noto_Serif } from 'next/font/google';
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
@@ -8,6 +8,8 @@ import { useRouter, usePathname } from 'next/navigation';
 
 const notoserif = Noto_Serif({ subsets: ['latin'], weight: '400' });
 
+
+//componente de cabeçalho fixo no topo da página com navegação
 export default function Header() {
     const pathname = usePathname();
     const [isMobile, setIsMobile] = useState(false);

@@ -1,11 +1,12 @@
 'use client'
 import { ReactNode } from 'react';
-import styles from './Carousel.module.css';
+import styles from './carousel.module.css';
 
 interface CarouselProps {
     children: ReactNode[];
 }
 
+//carrossel de categorias de produtos da pagina inicial
 export default function Carousel({ children }: CarouselProps) {
     return (
         <div className={styles.carouselWrapper}>

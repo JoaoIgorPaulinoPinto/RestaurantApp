@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import Container from "../../Container/Container";
-import styles from "./OrderOptionsSetting.module.css";
-import FormEndereco from "../../Perfil/EnderecoDropdown/endereco-form";
-import { Endereco } from "../../../Models/Endereco";
-import DropdownEnderecosDisplay from "./DropdownenderecosDisplay";
+import Container from "/src/Components/Container/container";
+import styles from "./finish-order-options.module.css"
+import FormEndereco from "../EnderecoForm/endereco-form";
+import { Endereco } from "/src/Models/Endereco";
+import DropdownEnderecosDisplay from "../Dropdown/dropdown-endereco-display";
 
 interface FinishOrderOptionsSettingProps {
     isEntrega: boolean;
@@ -15,6 +15,8 @@ interface FinishOrderOptionsSettingProps {
     setEndereco: React.Dispatch<React.SetStateAction<Endereco | null>>;
 }
 
+
+//componente para selecionar opções de entrega e pagamento ao finalizar o pedido
 export default function FinishOrderOptionsSetting({
     isEntrega,
     setIsEntrega,
@@ -62,7 +64,7 @@ export default function FinishOrderOptionsSetting({
 
                 {isEntrega && (
                     <>
-                        <DropdownEnderecosDisplay enderecos={enderecosPerfil} />
+                        <DropdownEnderecosDisplay saveOnProfile={false} setEnderecoSelecionado={setEndereco} enderecos={enderecosPerfil} />
                         <FormEndereco setEnderecoSelecionado={setEndereco} />
                     </>
                 )}

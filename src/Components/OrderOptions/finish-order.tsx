@@ -1,4 +1,4 @@
-import styles from './FinishOrder.module.css';
+import styles from './finish-order.module.css';
 import { ReactNode, useEffect, useState } from 'react';
 
 interface FinishOrderProps {
@@ -6,6 +6,7 @@ interface FinishOrderProps {
     children?: ReactNode; // permite colocar elementos dentro
 }
 
+//componente que exibe o total do pedido e um botão para finalizar a compra
 export default function FinishOrder({ total, children }: FinishOrderProps) {
     const [t, setTotal] = useState(total);
     useEffect(() => {

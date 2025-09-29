@@ -2,15 +2,17 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
-import ProductCard from '../Components/HomePage/ProductCard/Product';
-import Banner from '../Components/HomePage/Banner/Banner';
-import Carousel from '../Components/HomePage/Carousel/Carousel';
-import CarouselOption from '../Components/HomePage/Carousel/CarouselOption';
-import FinishOrder from '../Components/HomePage/OrderOptions/FinishOrder';
-import FinishOrderButton from '../Components/HomePage/OrderOptions/FinishOrderButton';
+import ProductCard from '../Components/ProductCard/product';
+import Banner from '../Components/Banner/banner';
+import Carousel from '../Components/Carousel/carousel';
+import CarouselOption from '../Components/Carousel/carousel-option';
+import FinishOrder from '../Components/OrderOptions/finish-order';
+import FinishOrderButton from '../Components/OrderOptions/finish-order-button';
 import { Beer, CakeSlice, Hamburger, Milk, Pizza, Popsicle, Utensils, Wine } from 'lucide-react';
 import produtosData from '/src/data/Produtos.json';
-import { Produto } from '../Components/HomePage/ProductCard/Product';
+import { Produto } from "/src/Models/Produto";
+
+// Página inicial do aplicativo
 
 export default function Home() {
   const router = useRouter();

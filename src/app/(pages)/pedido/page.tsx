@@ -1,12 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Produto } from '/src/Components/HomePage/ProductCard/Product'
+import { Produto } from '/src/Models/Produto';
 import styles from './Pedido.module.css';
 import { useRouter } from 'next/navigation';
-import OrderTable from '/src/Components/FinishingOrderPage/Table/OrderTable'
-import OrderOptionsSetting from '/src/Components/FinishingOrderPage/OrderOptionsSetting/OrderOptionsSetting'
-import Sumary from '/src/Components/FinishingOrderPage/Sumary/Sumary';
-import Container from '/src/Components/Container/Container';
+import OrderTable from '../../../Components/Table/finish-oder-table';
+import OrderOptionsSetting from '../../../Components/FinishOrderOptions/finish-order-options'
+import Sumary from '../../../Components/Sumary/finish-order-sumary';
+import Container from '../../../Components/Container/container';
 
 import { Endereco as Endereco } from '/src/Models/Endereco';
 
@@ -34,12 +34,11 @@ export default function PedidoPage() {
         const carrinho = localStorage.getItem("carrinho");
         if (carrinho) setProdutos(JSON.parse(carrinho));
     }, []);
+
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            const perfilUsuario = localStorage.getItem("perfilUsuario");
-            if (perfilUsuario) setEndereco(JSON.parse(perfilUsuario).enderecoSelecionado || null);
-        }
-    }, []);
+        console.log("Endereço selecionado:", endereco);
+    }, [endereco]);
+
     useEffect(() => {
         if (produtos.length > 0) {
             localStorage.setItem("carrinho", JSON.stringify(produtos));
