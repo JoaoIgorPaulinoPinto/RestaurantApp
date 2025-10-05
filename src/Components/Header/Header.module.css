@@ -1,59 +1,51 @@
 .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--size-8);
-    height: auto;
-    width: 100%;
-    position: relative;
-    z-index: 1000;
-    gap: var(--size-15);
-    background: var(--background-color);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.7);
-    box-sizing: border-box;
-    overflow-x: hidden;
-    color: var(--text-color-1)
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--size-3);
+  height: auto;
+  width: 100%;
+  position: relative;
+  z-index: 1000;
+  background: var(--background-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  overflow-x: hidden;
+  color: var(--text-color-1);
 }
 
 .header span {
-    cursor: pointer;
-}
-
-.leftSide {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    gap: var(--size-15);
+  cursor: pointer;
 }
 
 .title {
-    font-size: var(--text-l);
-    font-weight: bold;
-    color: var(--text-colo-1);
+  font-size: var(--text-l);
+  font-weight: bold;
+  color: var(--text-colo-1);
 }
 
 .title,
 .settings,
 .user {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: var(--text-colo-1);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-colo-1);
 }
 
 @media (max-width: 600px) {
-    .header {
-        padding: 0 var(--size-3);
-        height: var(--size-15);
-    }
+  .header {
+    padding: 0 var(--size-10);
+    height: var(--size-20);
+  }
 
-    .title {
-        font-size: var(--text-m);
-    }
+  .title {
+    font-size: var(--text-m);
+  }
 
-    .toggleOptions {
-        width: var(--size-9);
-        height: var(--size-9);
-    }
+  .toggleOptions {
+    width: var(--size-12);
+    height: var(--size-12);
+  }
 }

@@ -1,68 +1,92 @@
 .content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-5);
+
+  padding-bottom: 80px;
 }
 
 /* Header */
 .header {
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    font-size: var(--text-ml);
-    font-weight: 600;
-    text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: var(--text-ml);
+  font-weight: 600;
+  text-align: center;
 }
-
 
 /* Botão finalizar */
 .btn_finalizar {
-    border-radius: var(--border-radius-m);
-    width: 100%;
-    height: var(--size-20);
-    color: var(--text-color-2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    background-color: var(--accent-color);
-    font-weight: 600;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    margin-bottom: var(--size-3);
+  border-radius: var(--border-radius-m);
+  width: 100%;
+  height: var(--size-20);
+  color: var(--text-color-2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: var(--accent-color);
+  font-weight: 600;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  margin-bottom: var(--size-3);
+}
+.btn_finalizar {
+  align-self: center;
+  width: 90%;
+  margin: var(--size-5);
+  border: var(--def-border);
+  border-radius: var(--border-radius-s);
+  min-height: var(--size-24);
+  color: var(--text-color-1);
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
+/* Frete e total */
+.summary {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  padding: var(--size-4);
+  font-size: var(--text-sl);
+  /* maior fonte */
+  font-weight: 600;
+  gap: var(--size-4);
+  color: var(--text-color-1);
 }
 
-.btn_finalizar:hover {
-    background-color: var(--accent-color-hover);
-    transform: scale(1.03);
+.summary span {
+  color: var(--text-color-1);
 }
-
 /* Responsividade celular */
 @media (max-width: 640px) {
-    .body table {
-        font-size: var(--text-sl);
-    }
+  .body table {
+    font-size: var(--text-sl);
+  }
 
-    .body td,
-    .body th {
-        padding: var(--size-2);
-    }
+  .body td,
+  .body th {
+    padding: var(--size-2);
+  }
 
-    .optionsContainer {
-        flex-direction: column;
-    }
+  .optionsContainer {
+    flex-direction: column;
+  }
 
-    .summary {
-        flex-direction: column;
-        gap: var(--size-2);
-        font-size: var(--text-m);
-    }
+  .summary {
+    flex-direction: column;
+    gap: var(--size-2);
+    font-size: var(--text-m);
+  }
 
-    .optionColumn label {
-        font-size: var(--text-sl);
-    }
+  .optionColumn label {
+    font-size: var(--text-sl);
+  }
 
-    .buttonEndereco button {
-        padding: var(--size-2) var(--size-4);
-        font-size: var(--text-sm);
-    }
+  .buttonEndereco button {
+    padding: var(--size-2) var(--size-4);
+    font-size: var(--text-sm);
+  }
 }

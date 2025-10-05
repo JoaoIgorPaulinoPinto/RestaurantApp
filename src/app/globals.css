@@ -19,10 +19,8 @@ body {
   /* opcional: evita menu de toque longo no iOS */
 }
 
-
 /* Hover só no desktop */
 @media (pointer: fine) {
-
   button:hover,
   [type="button"]:hover,
   [type="submit"]:hover,

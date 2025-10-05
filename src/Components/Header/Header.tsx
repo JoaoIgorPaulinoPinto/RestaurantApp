@@ -1,57 +1,72 @@
-'use client';
-import { ChevronLeft, Settings, UserRound } from 'lucide-react';
-import styles from './header.module.css';
-import { Noto_Serif } from 'next/font/google';
-import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+"use client";
+import { ChevronLeft, Settings, UserRound } from "lucide-react";
+import { Dancing_Script } from "next/font/google";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import styles from "./Header.module.css";
 
-
-const notoserif = Noto_Serif({ subsets: ['latin'], weight: '400' });
-
+const notoserif = Dancing_Script({ subsets: ["latin"], weight: "400" });
 
 //componente de cabeçalho fixo no topo da página com navegação
 export default function Header() {
-    const pathname = usePathname();
-    const [isMobile, setIsMobile] = useState(false);
-    const router = useRouter();
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth <= 640);
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
+  const pathname = usePathname();
+  const [isMobile, setIsMobile] = useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-    const getRout = (rota: string) => {
-        router.push(rota);
-    }
-    const backRout = () => {
-        router.back();
-    }
+  const getRout = (rota: string) => {
+    router.push(rota);
+  };
+  const backRout = () => {
+    router.back();
+  };
 
-    return (
-        <>
-            <div className={styles.header}>
+  return (
+    <>
+      <div className={styles.header}>
+        {pathname != "/" && (
+          <span
+            onClick={() => {
+              backRout();
+            }}
+          >
+            {" "}
+            <ChevronLeft />{" "}
+          </span>
+        )}
 
-                <div className={styles.leftSide}>
-                    {pathname != '/' &&
-                        <span onClick={() => { backRout() }}>  <ChevronLeft /> </span>
-                    }
-                    <span onClick={() => { getRout('/') }} className={`${notoserif.className} ${styles.title}`} >Mata Fome</span>
-                </div>
-                <div className={styles.rightSide}>
-                    <button className={styles.settings}
-                        onClick={() => { getRout('/configuracoes') }}
-                    >
-                        <Settings size={isMobile ? 20 : 35} />
-                    </button>
-                    <button
-                        onClick={() => { getRout('/perfil') }}
-                        className={styles.user}>
-                        <UserRound size={isMobile ? 20 : 35} />
-                    </button>
-                </div>
-            </div >
-
-        </>
-    );
+        <div className={styles.header}>
+          <button
+            className={styles.settings}
+            onClick={() => {
+              getRout("/configuracoes");
+            }}
+          >
+            <Settings size={isMobile ? 20 : 35} />
+          </button>
+          <span
+            onClick={() => {
+              getRout("/");
+            }}
+            className={`${notoserif.className} ${styles.title}`}
+          >
+            Mata Fome
+          </span>
+          <button
+            onClick={() => {
+              getRout("/perfil");
+            }}
+            className={styles.user}
+          >
+            <UserRound size={isMobile ? 20 : 35} />
+          </button>
+        </div>
+      </div>
+    </>
+  );
 }

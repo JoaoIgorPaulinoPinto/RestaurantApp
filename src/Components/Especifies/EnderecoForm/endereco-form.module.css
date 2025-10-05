@@ -1,0 +1,107 @@
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--size-4);
+  align-items: start;
+  justify-items: start;
+  padding: var(--size-4);
+  background-color: var(--bg-color-1);
+  border-radius: var(--radius-2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.campo label {
+  font-size: var(--text-m);
+  font-weight: 500;
+  margin-bottom: var(--size-2);
+  color: var(--text-color-1);
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  padding: var(--size-3);
+  font-size: var(--text-m);
+  border: var(--def-border);
+  border-radius: var(--border-radius-s);
+  background-color: var(--primary-color);
+  color: var(--text-color-1);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: var(--primary-color-dark);
+  box-shadow: 0 0 0 2px var(--primary-color-alpha);
+}
+
+.dropdown {
+  background-color: var(--primary-color);
+  color: var(--text-color-1);
+  border: var(--def-border);
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+  padding-right: var(--size-4);
+  max-height: 200px;
+  /* Limite da altura expandida */
+  overflow-y: auto;
+  /* Adiciona barra de rolagem se necessário */
+}
+
+.dropdown option {
+  border-radius: var(--border-radius-s);
+  background-color: var(--primary-color);
+  color: var(--text-color-1);
+  padding: var(--size-3);
+  cursor: pointer;
+}
+
+.error {
+  margin-top: var(--size-1);
+  color: var(--error-color, red);
+  font-size: var(--text-sl);
+  overflow-wrap: break-word;
+}
+
+.form button {
+  grid-column: 1 / -1;
+  padding: var(--size-3) var(--size-4);
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+  border: var(--def-border);
+  border-radius: var(--border-radius-s);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.form button:hover:enabled {
+  background-color: var(--primary-color-dark);
+}
+
+.form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  /* cor do “polegar” */
+  background-color: var(--tertiary-color);
+  border-radius: 4px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+  background: var(--bg-color-1);
+  /* cor da trilha */
+}
