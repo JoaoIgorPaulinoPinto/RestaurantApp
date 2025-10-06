@@ -3,55 +3,50 @@
 import { Check, Pencil } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./finish-order-table.module.css";
-import { Produto } from "/src/Models/Produto";
+import { useCarrinho } from "/src/store/carrinho"; // ✅ Zustand
 
-interface TableProps {
-  produtos: Produto[];
-  setProdutos: React.Dispatch<React.SetStateAction<Produto[]>>;
-}
-
-export default function FinishingOrderTable({
-  produtos,
-  setProdutos,
-}: TableProps) {
+export default function FinishingOrderTable() {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const prevEditingIndex = useRef<number | null>(null);
 
+  // ✅ Zustand
+  const { produtosNoCarrinho: produtosNoCarrinho, updateQuantidade } =
+    useCarrinho();
+
   const aumentar = (itemIndex: number) => {
-    setProdutos((prev) =>
-      prev.map((p, idx) =>
-        idx === itemIndex ? { ...p, quantidade: p.quantidade + 1 } : p
-      )
-    );
+    const p = produtosNoCarrinho[itemIndex];
+    updateQuantidade(p, p.quantidade + 1);
   };
 
   const diminuir = (itemIndex: number) => {
-    setProdutos((prev) =>
-      prev.map((p, idx) =>
-        idx === itemIndex
-          ? { ...p, quantidade: Math.max(p.quantidade - 1, 0) }
-          : p
-      )
-    );
+    const p = produtosNoCarrinho[itemIndex];
+    updateQuantidade(p, Math.max(p.quantidade - 1, 0));
   };
 
   useEffect(() => {
     const saveChanges = () => {
-      const carrinhoComObservacao = produtos.map((p) => ({
+      const carrinhoComObservacao = produtosNoCarrinho.map((p) => ({
         ...p,
         observacao: p.observacao ?? "",
       }));
-      localStorage.setItem(
-        "perfilUsuario",
-        JSON.stringify(carrinhoComObservacao)
-      );
     };
 
     if (prevEditingIndex.current !== null && editingIndex === null) {
       saveChanges();
     }
     prevEditingIndex.current = editingIndex;
-  }, [editingIndex, produtos]);
+  }, [editingIndex, produtosNoCarrinho]);
+
+  const alterarObservacao = (index: number, valor: string) => {
+    const p = produtosNoCarrinho[index];
+    updateQuantidade(p, p.quantidade); // mantém quantidade
+    // atualizar apenas a observação
+    useCarrinho.setState((state) => ({
+      produtosNoCarrinho: state.produtosNoCarrinho.map((prod, idx) =>
+        idx === index ? { ...prod, observacao: valor } : prod
+      ),
+    }));
+  };
 
   return (
     <div className={styles.body}>
@@ -65,7 +60,7 @@ export default function FinishingOrderTable({
           </tr>
         </thead>
         <tbody>
-          {produtos.map((p, i) => (
+          {produtosNoCarrinho.map((p, i) => (
             <React.Fragment key={p.id ?? i}>
               {/* Linha principal */}
               <tr>
@@ -129,15 +124,7 @@ export default function FinishingOrderTable({
                           setEditingIndex(null);
                         }
                       }}
-                      onChange={(e) => {
-                        setProdutos((prev) =>
-                          prev.map((prod, idx) =>
-                            idx === i
-                              ? { ...prod, observacao: e.target.value }
-                              : prod
-                          )
-                        );
-                      }}
+                      onChange={(e) => alterarObservacao(i, e.target.value)}
                       className={styles.obsInput}
                     />
                   ) : (

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import Container from "../../../Components/ContentContainer/Container";
 import styles from "./perfil.module.css";
-import Container from "/src/Components/Container/Container";
 
 export default function Perfil() {
   const [temaClaro, setTemaClaro] = useState(true);

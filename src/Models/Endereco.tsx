@@ -1,7 +1,7 @@
 export interface Endereco {
-    rua: string;
-    numero: number;
-    bairro: string;
-    cidade: string;
-    estado: string;
+  rua: string;
+  numero: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
 }

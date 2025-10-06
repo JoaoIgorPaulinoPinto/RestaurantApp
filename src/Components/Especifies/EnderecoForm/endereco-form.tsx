@@ -1,15 +1,17 @@
-// import { GetUsuarioData } from "/src/Services/LocalStorageManager";
+"use client";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import styles from "./endereco-form.module.css";
+import { Endereco } from "/src/Models/Endereco";
 
 interface Props {
+  setEnderecos?: (e: Endereco[]) => void;
+  enderecos: Endereco[];
   setEnderecoSelecionado: (e: Endereco) => void;
 }
 
-// Interface do formulário
-import { Endereco, Endereco as EnderecoForm } from "/src/Models/Endereco";
 const enderecoSchema = yup.object({
   numero: yup
     .number()
@@ -21,14 +23,18 @@ const enderecoSchema = yup.object({
   cidade: yup.string().required("Cidade é obrigatória"),
   estado: yup.string().required("Estado é obrigatório"),
 });
-export default function FormEndereco({ setEnderecoSelecionado }: Props) {
-  //react hook form
+
+export default function FormEndereco({
+  setEnderecos,
+  enderecos,
+  setEnderecoSelecionado,
+}: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset, // adiciona reset
-  } = useForm<EnderecoForm>({
+    reset,
+  } = useForm<Endereco>({
     resolver: yupResolver(enderecoSchema),
   });
 
@@ -40,28 +46,13 @@ export default function FormEndereco({ setEnderecoSelecionado }: Props) {
       cidade: data.cidade,
       estado: data.estado,
     };
-    const perfildata = localStorage.getItem("perfilUsuario") || "{}";
-    const enderecos = localStorage.getItem("perfilUsuario")
-      ? JSON.parse(perfildata).endereco
-      : [];
 
-    // Adiciona o novo endereço ao array existente
-    const novosEnderecos = [...enderecos, novo];
+    const nenderecos = [...(enderecos || []), novo];
 
-    setEnderecoSelecionado(novo); // define como selecionado
+    // Atualiza seleção e estado do pai
+    setEnderecoSelecionado(novo);
+    setEnderecos?.(nenderecos);
 
-    // Atualiza localStorage sem remover os endereços existentes
-    const perfilUsuarioStr = localStorage.getItem("perfilUsuario");
-    const perfilUsuario = perfilUsuarioStr ? JSON.parse(perfilUsuarioStr) : {};
-
-    const userData = {
-      ...perfilUsuario,
-      endereco: [...novosEnderecos], // mantém todos
-    };
-
-    localStorage.setItem("perfilUsuario", JSON.stringify(userData));
-
-    // Limpa apenas os campos do formulário
     reset();
   }
 

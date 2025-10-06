@@ -1,30 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Container from "../Container/Container";
+import Container from "../ContentContainer/Container";
 import DropdownEnderecosDisplay from "../Dropdown/dropdown-endereco-display";
 import styles from "./finish-order-options.module.css";
 import FormEndereco from "/src/Components/Especifies/EnderecoForm/endereco-form";
 import { Endereco } from "/src/Models/Endereco";
 
 interface FinishOrderOptionsSettingProps {
+  setEnderecos?: (e: Endereco[]) => void;
   isEntrega: boolean;
-  setIsEntrega: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEntrega: (e: boolean) => void;
   metodoPagamento: string;
-  setMetodoPagamento: React.Dispatch<React.SetStateAction<string>>;
-  setEndereco: React.Dispatch<React.SetStateAction<Endereco | null>>;
+  setMetodoPagamento: (e: string) => void;
+  setEndereco: (e: Endereco) => void;
 }
 
-//componente para selecionar opções de entrega e pagamento ao finalizar o pedido
+// Componente para selecionar opções de entrega e pagamento
 export default function FinishOrderOptionsSetting({
   isEntrega,
   setIsEntrega,
   metodoPagamento,
   setMetodoPagamento,
   setEndereco,
+  setEnderecos,
 }: FinishOrderOptionsSettingProps) {
   const [enderecosPerfil, setEnderecosPerfil] = useState<Endereco[]>([]);
+  const [enderecoSelecionado, setEnderecoSelecionado] =
+    useState<Endereco | null>(null);
 
+  // Carrega endereços do localStorage ao montar
   useEffect(() => {
     if (typeof window !== "undefined") {
       const usuarioData = JSON.parse(
@@ -34,8 +39,16 @@ export default function FinishOrderOptionsSetting({
         ? usuarioData.endereco
         : [];
       setEnderecosPerfil(enderecos);
+
+      if (usuarioData.enderecoSelecionado) {
+        setEnderecoSelecionado(usuarioData.enderecoSelecionado);
+        setEndereco(usuarioData.enderecoSelecionado);
+      } else if (enderecos.length > 0) {
+        setEnderecoSelecionado(enderecos[0]);
+        setEndereco(enderecos[0]);
+      }
     }
-  }, []);
+  }, [setEndereco]);
 
   return (
     <>
@@ -67,17 +80,29 @@ export default function FinishOrderOptionsSetting({
           {isEntrega && (
             <>
               <DropdownEnderecosDisplay
-                saveOnProfile={false}
-                setEnderecoSelecionado={setEndereco}
+                saveOnProfile={true}
+                setEnderecoSelecionado={(e: Endereco) => {
+                  setEnderecoSelecionado(e);
+                  setEndereco(e);
+                }}
                 enderecos={enderecosPerfil}
               />
-              <FormEndereco setEnderecoSelecionado={setEndereco} />
+
+              <FormEndereco
+                enderecos={enderecosPerfil}
+                setEnderecos={setEnderecos}
+                setEnderecoSelecionado={(e: Endereco) => {
+                  setEnderecoSelecionado(e);
+                  setEndereco(e);
+                }}
+              />
             </>
           )}
         </div>
       </Container>
+
+      {/* Pagamento */}
       <Container>
-        {/* Pagamento */}
         <div className={styles.optionColumn}>
           <label>
             <input

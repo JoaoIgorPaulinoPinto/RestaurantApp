@@ -18,56 +18,38 @@ import CarouselOption from "../Components/Carousel/carousel-option";
 import ProductCard from "../Components/ProductCard/product";
 import styles from "./page.module.css";
 import produtosData from "/src/data/Produtos.json";
-import { Produto } from "/src/Models/Produto";
+import { Produto, useCarrinho } from "/src/store/carrinho";
 
 // Página inicial do aplicativo
-
 export default function Home() {
   const router = useRouter();
-  const [hydrated, setHydrated] = useState(false);
 
+  // Zustand store, pegando oque será utilizado
+  const {
+    produtosNoCarrinho: produtosNoCarrinho,
+    clearCarrinho: clearCarrinho,
+  } = useCarrinho();
+
+  const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     setHydrated(true);
   }, []);
 
-  // ------ PRODUTO -------------//
-  // Inicializa mapa de produtos
-  const [produtosMap, setProdutosMap] = useState<Record<number, Produto>>(
-    () => {
-      const carrinhoSalvo: Produto[] =
-        typeof window !== "undefined" && localStorage.getItem("carrinho")
-          ? JSON.parse(localStorage.getItem("carrinho") as string)
-          : [];
-
-      const map: Record<number, Produto> = {};
-      produtosData.Produtos.forEach((p) => {
-        const itemSalvo = carrinhoSalvo.find((c) => c.id === p.id);
-
-        map[p.id] = itemSalvo
-          ? {
-              ...p,
-              quantidade: itemSalvo.quantidade,
-              observacao: itemSalvo.observacao || "",
-            }
-          : { ...p, quantidade: 0, observacao: "" };
-      });
-      return map;
+  const [produtos, setProdutos] = useState<Produto[]>();
+  useEffect(() => {
+    if (hydrated) {
+      setProdutos(produtosData.Produtos);
     }
-  );
-
-  // Produtos selecionados
-  const produtosSelecionados = useMemo(
-    () => Object.values(produtosMap).filter((p) => p.quantidade > 0),
-    [produtosMap]
-  );
+  }, [hydrated]);
 
   // Total do carrinho
   const total = useMemo(
     () =>
-      produtosSelecionados.reduce((acc, p) => acc + p.preco * p.quantidade, 0),
-    [produtosSelecionados]
+      produtosNoCarrinho.reduce((acc, p) => acc + p.preco * p.quantidade, 0),
+    [produtosNoCarrinho]
   );
 
+  // Opções de filtro (categorias)
   const options = useMemo(
     () => [
       { icon: <Pizza size={24} color="crimson" />, name: "Pizza" },
@@ -81,67 +63,28 @@ export default function Home() {
     ],
     []
   );
-  useEffect(() => {
-    if (hydrated) {
-      const produtosComObs = produtosSelecionados.map((p) => ({
-        ...p,
-        observacao: p.observacao ?? "", // garante que nunca seja undefined
-      }));
-      localStorage.setItem("carrinho", JSON.stringify(produtosComObs));
-    }
-  }, [produtosSelecionados, hydrated]);
+
   const [selectedFilter, setSelectedFilter] = useState("");
 
+  // Filtrar produtos
+  const produtosFiltrados = useMemo(() => {
+    if (!selectedFilter || produtos == null) return produtos;
+    return produtos.filter((p) => p.categoria === selectedFilter);
+  }, [produtos, selectedFilter]);
+
   // ------ AÇÕES -------------//
-
-  const handleFinishOrder = () => {
-    localStorage.setItem("carrinho", JSON.stringify(produtosSelecionados));
-    router.push("/pedido");
-  };
-
-  const handleQuantidadeChange = (produto: Produto, novaQtd: number) => {
-    setProdutosMap((prev) => ({
-      ...prev,
-      [produto.id]: { ...prev[produto.id], quantidade: novaQtd },
-    }));
-  };
-
   const handleSelectFilter = (newFilter: string) => {
     setSelectedFilter((prev) => (prev === newFilter ? "" : newFilter));
   };
 
-  // Salva carrinho no localStorage quando muda
-  useEffect(() => {
-    if (hydrated) {
-      localStorage.setItem("carrinho", JSON.stringify(produtosSelecionados));
-    }
-  }, [produtosSelecionados, hydrated]);
-
-  const produtosFiltrados = useMemo(() => {
-    if (!selectedFilter) return Object.values(produtosMap);
-    return Object.values(produtosMap).filter(
-      (p) => p.categoria === selectedFilter
-    );
-  }, [produtosMap, selectedFilter]);
-
-  // ------ Outro -------------//
-
   const limparSelecao = () => {
-    // limpa o localStorage
-    localStorage.setItem("carrinho", JSON.stringify([]));
-
-    // reseta o estado (quantidade = 0 para todos os produtos)
-    setProdutosMap((prev) => {
-      const novoMap: Record<number, Produto> = {};
-      Object.values(prev).forEach((p) => {
-        novoMap[p.id] = { ...p, quantidade: 0 };
-      });
-      return novoMap;
-    });
+    clearCarrinho();
   };
+
   const handleClick = () => {
     router.push("/pedido");
   };
+
   return (
     <div className={styles.background}>
       <Banner />
@@ -160,7 +103,7 @@ export default function Home() {
             ))}
           </Carousel>
 
-          {produtosSelecionados.length > 0 && (
+          {produtosNoCarrinho.length > 0 && (
             <button
               className={styles.btn_limparselecao}
               onClick={limparSelecao}
@@ -170,16 +113,16 @@ export default function Home() {
           )}
 
           <div className={styles.cardapio}>
-            {produtosFiltrados.map((product) => (
-              <ProductCard
-                key={product.id}
-                produto={product}
-                onQuantidadeChange={(q) => handleQuantidadeChange(product, q)}
-              />
-            ))}
+            {produtosFiltrados &&
+              produtosFiltrados.map((product) => (
+                <ProductCard key={product.id} produto={product} />
+              ))}
           </div>
+
           <div className={styles.actions}>
-            <span className={styles.totalPreco}>R${total.toFixed(2)}</span>
+            <span className={styles.totalPreco}>
+              R$ {total.toFixed(2).replace(".", ",")}
+            </span>
             <button className={styles.btn} onClick={handleClick}>
               <ShoppingCart color="white" className={styles.ShoppingCart} />
             </button>
