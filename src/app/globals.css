@@ -26,7 +26,7 @@ body {
   [type="submit"]:hover,
   [type="reset"]:hover,
   [role="button"]:hover {
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
     opacity: 0.9;
   }
 }

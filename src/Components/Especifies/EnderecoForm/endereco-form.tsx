@@ -5,12 +5,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import styles from "./endereco-form.module.css";
 import { Endereco } from "/src/Models/Endereco";
-
-interface Props {
-  setEnderecos?: (e: Endereco[]) => void;
-  enderecos: Endereco[];
-  setEnderecoSelecionado: (e: Endereco) => void;
-}
+import { usePerfil } from "/src/store/perfil";
 
 const enderecoSchema = yup.object({
   numero: yup.string().required("Número é obrigatório"),
@@ -20,11 +15,9 @@ const enderecoSchema = yup.object({
   estado: yup.string().required("Estado é obrigatório"),
 });
 
-export default function FormEndereco({
-  setEnderecos,
-  enderecos,
-  setEnderecoSelecionado,
-}: Props) {
+export default function FormEndereco() {
+  const { setEnderecos, setEnderecoSelecionado, enderecos } = usePerfil();
+
   const {
     register,
     handleSubmit,

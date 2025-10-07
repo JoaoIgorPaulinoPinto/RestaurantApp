@@ -1,29 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
 import styles from "./dropdown-endereco-display.module.css";
 import { Endereco } from "/src/Models/Endereco";
-
-interface Props {
-  saveOnProfile: boolean;
-  enderecos: Endereco[];
-  setEnderecoSelecionado: (e: Endereco) => void;
-}
+import { usePerfil } from "/src/store/perfil";
 
 /// Dropdown para selecionar endereços salvos no perfil do usuário
-export default function DropdownEnderecosDisplay({
-  saveOnProfile,
-  enderecos,
-  setEnderecoSelecionado,
-}: Props) {
-  const [enderecoSelecionado, setEndSelec] = useState<Endereco | null>(null);
-
-  useEffect(() => {
-    const perfilUsuarioStr = localStorage.getItem("perfilUsuario");
-    if (perfilUsuarioStr) {
-      const perfilUsuario = JSON.parse(perfilUsuarioStr);
-      setEndSelec(perfilUsuario.enderecoSelecionado || null);
-    }
-  }, []);
+export default function DropdownEnderecosDisplay() {
+  const { enderecoSelecionado, setEnderecoSelecionado, enderecos } =
+    usePerfil();
 
   const handleSelectChange = (endereco: Endereco) => {
     const novo: Endereco = {
@@ -35,15 +18,6 @@ export default function DropdownEnderecosDisplay({
     };
 
     setEnderecoSelecionado(novo);
-    //salvando no perfil se necessário
-    if (!saveOnProfile) return;
-    const perfilUsuarioStr = localStorage.getItem("perfilUsuario");
-    const perfilUsuario = perfilUsuarioStr ? JSON.parse(perfilUsuarioStr) : {};
-    const userData = {
-      ...perfilUsuario,
-      enderecoSelecionado: novo,
-    };
-    localStorage.setItem("perfilUsuario", JSON.stringify(userData));
   };
   return (
     <div className="optionColumn">

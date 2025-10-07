@@ -1,40 +1,37 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Container from "../../../Components/ContentContainer/Container";
 import styles from "./perfil.module.css";
+import { usePreferencias } from "/src/store/preferencias";
 
 export default function Perfil() {
-  const [temaClaro, setTemaClaro] = useState(true);
-  const [notificacoesLigadas, setNotificacoesLigadas] = useState(true);
-
+  const { temaDark, setTema, notificar, setNotificar } = usePreferencias();
   useEffect(() => {
-    document.body.dataset.theme = temaClaro ? "light" : "dark";
-  }, [temaClaro]);
+    document.body.dataset.theme = temaDark ? "dark" : "light";
+  }, [temaDark]);
 
   return (
     <Container>
       <div>
         <div className={styles.config}>
-          <span>Tema: {temaClaro ? "Claro" : "Escuro"}</span>
+          <span>Tema: {temaDark ? "Escuro" : "Claro"}</span>
           <label className={styles.toggle}>
             <input
               type="checkbox"
-              checked={temaClaro}
-              onChange={() => setTemaClaro(!temaClaro)}
+              checked={temaDark}
+              onChange={() => setTema(!temaDark)}
             />
             <span className={styles.slider}></span>
           </label>
         </div>
 
         <div className={styles.config}>
-          <span>
-            Notificações: {notificacoesLigadas ? "Ligadas" : "Desligadas"}
-          </span>
+          <span>Notificações: {notificar ? "Ligadas" : "Desligadas"}</span>
           <label className={styles.toggle}>
             <input
               type="checkbox"
-              checked={notificacoesLigadas}
-              onChange={() => setNotificacoesLigadas(!notificacoesLigadas)}
+              checked={notificar}
+              onChange={() => setNotificar(!notificar)}
             />
             <span className={styles.slider}></span>
           </label>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Container from "../ContentContainer/Container";
 import DropdownEnderecosDisplay from "../Dropdown/dropdown-endereco-display";
 import styles from "./finish-order-options.module.css";
@@ -23,10 +23,7 @@ export default function FinishOrderOptionsSetting({
   metodoPagamento,
   setMetodoPagamento,
   setEndereco,
-  setEnderecos,
 }: FinishOrderOptionsSettingProps) {
-  const [enderecosPerfil, setEnderecosPerfil] = useState<Endereco[]>([]);
-
   // Carrega endereços do localStorage ao montar
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -36,7 +33,6 @@ export default function FinishOrderOptionsSetting({
       const enderecos: Endereco[] = Array.isArray(usuarioData.endereco)
         ? usuarioData.endereco
         : [];
-      setEnderecosPerfil(enderecos);
 
       if (usuarioData.enderecoSelecionado) {
         setEndereco(usuarioData.enderecoSelecionado);
@@ -75,21 +71,8 @@ export default function FinishOrderOptionsSetting({
 
           {isEntrega && (
             <>
-              <DropdownEnderecosDisplay
-                saveOnProfile={true}
-                setEnderecoSelecionado={(e: Endereco) => {
-                  setEndereco(e);
-                }}
-                enderecos={enderecosPerfil}
-              />
-
-              <FormEndereco
-                enderecos={enderecosPerfil}
-                setEnderecos={setEnderecos}
-                setEnderecoSelecionado={(e: Endereco) => {
-                  setEndereco(e);
-                }}
-              />
+              <DropdownEnderecosDisplay />
+              <FormEndereco />
             </>
           )}
         </div>

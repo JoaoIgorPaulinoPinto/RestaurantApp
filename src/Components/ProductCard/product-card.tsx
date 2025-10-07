@@ -45,16 +45,14 @@ export default function ProductCard({ produto }: ProductCardProps) {
         </div>
       </div>
 
-      <div className={styles.footer}>
-        <div className={styles.quantidadeControls}>
-          <button onClick={diminuir} className={styles.qtdButton}>
-            -
-          </button>
-          <span className={styles.quantidadeDisplay}>{produto.quantidade}</span>
-          <button onClick={aumentar} className={styles.qtdButton}>
-            +
-          </button>
-        </div>
+      <div className={styles.quantidadeControls}>
+        <button onClick={diminuir} className={styles.qtdButton}>
+          -
+        </button>
+        <span className={styles.quantidadeDisplay}>{produto.quantidade}</span>
+        <button onClick={aumentar} className={styles.qtdButton}>
+          +
+        </button>
       </div>
     </div>
   );

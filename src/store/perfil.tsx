@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { Endereco } from "../Models/Endereco";
 
 type PerfilState = {
@@ -11,7 +11,6 @@ type PerfilState = {
 
   setNome: (nome: string) => void;
   setNumero: (numero: string) => void;
-  setEndereco: (endereco: Endereco) => void;
   setEnderecos: (enderecos: Endereco[]) => void;
   setEnderecoSelecionado: (endereco: Endereco | null) => void;
 };
@@ -33,13 +32,13 @@ export const usePerfil = create<PerfilState>()(
 
       setNome: (nome) => set({ nome }),
       setNumero: (numero) => set({ numero }),
-      setEndereco: (endereco) => set({ endereco }),
       setEnderecos: (enderecos) => set({ enderecos }),
       setEnderecoSelecionado: (endereco) =>
         set({ enderecoSelecionado: endereco }),
     }),
     {
       name: "perfil-storage", // chave usada no localStorage
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

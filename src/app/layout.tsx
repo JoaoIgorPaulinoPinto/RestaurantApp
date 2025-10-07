@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
+"use client";
+import Script from "next/script";
+import { useEffect, useState } from "react";
+import Header from "../Components/Header/Header";
 import "./globals.css";
-import Header from "/src/Components/Header/Header";
-
-export const metadata: Metadata = {
-  title: "Restaurante",
-  description: "App for restaurants",
-};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+
   return (
-    <html lang="pt-br" data-theme="dark">
+    <html lang="pt-br">
       <body
         style={{
           backgroundColor: "var(--background-color)",
@@ -26,8 +26,25 @@ export default function RootLayout({
           overflowY: "auto",
         }}
       >
-        <Header />
-        {children}
+        <Script id="theme-init" strategy="lazyOnload">
+          {`
+            try {
+              const pref = localStorage.getItem('preferencias-storage');
+              if (pref) {
+                const { state } = JSON.parse(pref);
+                document.documentElement.dataset.theme = state.temaDark ? 'dark' : 'light';
+              }
+            } catch (e) {}
+          `}
+        </Script>
+        {hydrated ? (
+          <>
+            <Header />
+            {children}
+          </>
+        ) : (
+          <></>
+        )}
       </body>
     </html>
   );

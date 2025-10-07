@@ -72,13 +72,6 @@ export default function PedidoPage() {
         <OrderTable />
       </Container>
 
-      <Container>
-        <div className={styles.summary}>
-          <span>Frete: R${(7).toFixed(2)}</span>
-          <span>Total: R${total.toFixed(2).replace(".", ",")}</span>
-        </div>
-      </Container>
-
       <OrderOptionsSetting
         isEntrega={isEntrega}
         setIsEntrega={setIsEntrega}
@@ -87,9 +80,15 @@ export default function PedidoPage() {
         setEndereco={setEndereco}
       />
 
-      <button className={styles.btn_finalizar} onClick={handleFinalizar}>
-        Finalizar Pedido
-      </button>
+      <Container>
+        <div className={styles.summary}>
+          <span>Frete: R${(7).toFixed(2)}</span>
+          <span>Total: R${total.toFixed(2).replace(".", ",")}</span>
+          <button className={styles.btn_finalizar} onClick={handleFinalizar}>
+            Finalizar Pedido
+          </button>
+        </div>
+      </Container>
     </div>
   );
 }
