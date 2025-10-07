@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
+import produtosData from "/src/data/Produtos.json";
 
-// Tipo produto
 export type Produto = {
   id: number;
   name: string;
@@ -12,46 +12,70 @@ export type Produto = {
   quantidade: number;
 };
 
-// Estado do carrinho
 type CarrinhoState = {
   produtosNoCarrinho: Produto[];
+  produtosListagem: Produto[];
   updateQuantidade: (produto: Produto, novaQuantidade: number) => void;
   clearCarrinho: () => void;
+  hasHydrated: boolean;
+  setHasHydrated: (v: boolean) => void;
 };
 
 export const useCarrinho = create<CarrinhoState>()(
   persist(
     (set) => ({
+      produtosListagem: produtosData.Produtos.map((p) => ({
+        ...p,
+        quantidade: 0,
+      })),
       produtosNoCarrinho: [],
+      hasHydrated: false,
+      setHasHydrated: (v) => set({ hasHydrated: v }),
 
-      updateQuantidade: (produto: Produto, novaQuantidade: number) =>
+      updateQuantidade: (produto, novaQuantidade) =>
         set((state) => {
           const existente = state.produtosNoCarrinho.find(
             (p) => p.id === produto.id
           );
 
-          // ✅ Se já existe e a nova quantidade é 0 ou menor → remover
-          if (existente && novaQuantidade <= 0) {
-            return {
-              produtosNoCarrinho: state.produtosNoCarrinho.filter(
-                (p) => p.id !== produto.id
-              ),
-            };
-          }
+          let newCarrinho = state.produtosNoCarrinho;
+          const newListagem = state.produtosListagem.map((p) =>
+            p.id === produto.id ? { ...p, quantidade: novaQuantidade } : p
+          );
 
-          // ✅ Se não existe → adicionar
-          return {
-            produtosNoCarrinho: [
+          if (existente && novaQuantidade <= 0) {
+            newCarrinho = state.produtosNoCarrinho.filter(
+              (p) => p.id !== produto.id
+            );
+          } else if (existente) {
+            newCarrinho = state.produtosNoCarrinho.map((p) =>
+              p.id === produto.id ? { ...p, quantidade: novaQuantidade } : p
+            );
+          } else {
+            newCarrinho = [
               ...state.produtosNoCarrinho,
               { ...produto, quantidade: novaQuantidade },
-            ],
+            ];
+          }
+
+          return {
+            produtosNoCarrinho: newCarrinho,
+            produtosListagem: newListagem,
           };
         }),
 
-      clearCarrinho: () => set({ produtosNoCarrinho: [] }),
+      clearCarrinho: () =>
+        set({
+          produtosNoCarrinho: [],
+          produtosListagem: produtosData.Produtos.map((p) => ({
+            ...p,
+            quantidade: 0,
+          })),
+        }),
     }),
     {
-      name: "carrinho-storage", // salva no localStorage
+      name: "carrinho-storage",
+      storage: createJSONStorage(() => localStorage), // ✅ aqui é o correto
     }
   )
 );

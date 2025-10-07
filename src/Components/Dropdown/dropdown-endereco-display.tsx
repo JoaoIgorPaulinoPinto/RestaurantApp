@@ -28,7 +28,7 @@ export default function DropdownEnderecosDisplay({
   const handleSelectChange = (endereco: Endereco) => {
     const novo: Endereco = {
       rua: endereco.rua,
-      numero: Number(endereco.numero),
+      numero: endereco.numero,
       bairro: endereco.bairro,
       cidade: endereco.cidade,
       estado: endereco.estado,

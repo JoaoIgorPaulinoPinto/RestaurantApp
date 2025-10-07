@@ -26,8 +26,6 @@ export default function FinishOrderOptionsSetting({
   setEnderecos,
 }: FinishOrderOptionsSettingProps) {
   const [enderecosPerfil, setEnderecosPerfil] = useState<Endereco[]>([]);
-  const [enderecoSelecionado, setEnderecoSelecionado] =
-    useState<Endereco | null>(null);
 
   // Carrega endereços do localStorage ao montar
   useEffect(() => {
@@ -41,10 +39,8 @@ export default function FinishOrderOptionsSetting({
       setEnderecosPerfil(enderecos);
 
       if (usuarioData.enderecoSelecionado) {
-        setEnderecoSelecionado(usuarioData.enderecoSelecionado);
         setEndereco(usuarioData.enderecoSelecionado);
       } else if (enderecos.length > 0) {
-        setEnderecoSelecionado(enderecos[0]);
         setEndereco(enderecos[0]);
       }
     }
@@ -82,7 +78,6 @@ export default function FinishOrderOptionsSetting({
               <DropdownEnderecosDisplay
                 saveOnProfile={true}
                 setEnderecoSelecionado={(e: Endereco) => {
-                  setEnderecoSelecionado(e);
                   setEndereco(e);
                 }}
                 enderecos={enderecosPerfil}
@@ -92,7 +87,6 @@ export default function FinishOrderOptionsSetting({
                 enderecos={enderecosPerfil}
                 setEnderecos={setEnderecos}
                 setEnderecoSelecionado={(e: Endereco) => {
-                  setEnderecoSelecionado(e);
                   setEndereco(e);
                 }}
               />

@@ -13,11 +13,7 @@ interface Props {
 }
 
 const enderecoSchema = yup.object({
-  numero: yup
-    .number()
-    .typeError("Esse campo deve conter um número")
-    .positive("Esse número não pode ser negativo ou zero")
-    .required("Número é obrigatório"),
+  numero: yup.string().required("Número é obrigatório"),
   rua: yup.string().required("Rua é obrigatória"),
   bairro: yup.string().required("Bairro é obrigatório"),
   cidade: yup.string().required("Cidade é obrigatória"),
@@ -41,7 +37,7 @@ export default function FormEndereco({
   function salvarEndereco(data: Endereco) {
     const novo: Endereco = {
       rua: data.rua,
-      numero: Number(data.numero),
+      numero: data.numero,
       bairro: data.bairro,
       cidade: data.cidade,
       estado: data.estado,
@@ -66,12 +62,7 @@ export default function FormEndereco({
 
       <div className={styles.campo}>
         <label htmlFor="numero">Número *</label>
-        <input
-          id="numero"
-          type="number"
-          placeholder="Número..."
-          {...register("numero")}
-        />
+        <input id="numero" placeholder="Número..." {...register("numero")} />
         <p className={styles.error}>{errors.numero?.message}</p>
       </div>
 

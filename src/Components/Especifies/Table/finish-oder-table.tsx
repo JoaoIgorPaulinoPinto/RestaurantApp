@@ -25,7 +25,7 @@ export default function FinishingOrderTable() {
 
   useEffect(() => {
     const saveChanges = () => {
-      const carrinhoComObservacao = produtosNoCarrinho.map((p) => ({
+      produtosNoCarrinho.map((p) => ({
         ...p,
         observacao: p.observacao ?? "",
       }));

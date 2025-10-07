@@ -28,11 +28,8 @@ export default function PedidoPage() {
   const router = useRouter();
 
   // ✅ Zustand
-  const {
-    produtosNoCarrinho: produtos,
-    updateQuantidade,
-    clearCarrinho: clearProdutos,
-  } = useCarrinho();
+  const { produtosNoCarrinho: produtos, clearCarrinho: clearProdutos } =
+    useCarrinho();
 
   // total do pedido
   const total = useMemo(
