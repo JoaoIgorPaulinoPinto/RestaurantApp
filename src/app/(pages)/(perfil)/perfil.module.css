@@ -1,0 +1,51 @@
+.userDataContainer {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4);
+  justify-content: start;
+  font-size: small;
+  color: var(--text-color-1);
+  margin: 0 auto;
+}
+.login_button {
+  margin: var(--size-4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: var(--size-40);
+  height: var(--size-20);
+  background-color: var(--accent-color);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: var(--text-color-2);
+  border-radius: var(--size-4);
+  cursor: pointer;
+  font-weight: bold;
+}
+.cad_button {
+  font-weight: bold;
+  margin: var(--size-4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: var(--size-40);
+  height: var(--size-20);
+  background-color: var(--accent-color);
+  color: var(--accent-color);
+  border-radius: var(--size-4);
+  cursor: pointer;
+  background-color: transparent;
+  border: 3px solid var(--accent-color);
+}
+
+.login {
+  gap: var(--size-20);
+  display: flex;
+  flex-direction: row;
+  padding: var(--size-4);
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}

@@ -1,8 +1,9 @@
 "use client";
-import { ChevronLeft, Settings, UserRound } from "lucide-react";
+import { ChevronLeft, Settings } from "lucide-react";
 import { Dancing_Script } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Perfil from "../PerfilButton/perfil-dropdown";
 import styles from "./Header.module.css";
 
 const notoserif = Dancing_Script({ subsets: ["latin"], weight: "400" });
@@ -57,14 +58,7 @@ export default function Header() {
           >
             Mata Fome
           </span>
-          <button
-            onClick={() => {
-              getRout("/perfil");
-            }}
-            className={styles.user}
-          >
-            <UserRound size={isMobile ? 20 : 35} />
-          </button>
+          <Perfil />
         </div>
       </div>
     </>

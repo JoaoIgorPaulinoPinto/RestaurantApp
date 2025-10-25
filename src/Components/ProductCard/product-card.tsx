@@ -2,7 +2,8 @@
 import { Inclusive_Sans } from "next/font/google";
 import Image from "next/image";
 import styles from "./product.module.css";
-import { Produto, useCarrinho } from "/src/store/carrinho";
+import { Produto } from "/src/Models/Produto";
+import { useCarrinho } from "/src/store/carrinho";
 
 interface ProductCardProps {
   produto: Produto;
@@ -26,14 +27,14 @@ export default function ProductCard({ produto }: ProductCardProps) {
         <div className={styles.cardapioFoto}>
           <Image
             src="/xburguer.png"
-            alt={produto.name}
+            alt={produto.id}
             fill
             style={{ objectFit: "cover" }}
           />
         </div>
         <div className={styles.content}>
           <span className={`${notoserif.className} ${styles.cardapioNome}`}>
-            {produto.name}
+            {produto.nome}
           </span>
           <span className={`${notoserif.className} ${styles.cardapioPreco}`}>
             {produto.preco.toLocaleString("pt-BR", {

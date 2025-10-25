@@ -78,7 +78,7 @@ export default function FinishingOrderTable() {
                     )}
                   </button>
                 </td>
-                <td data-label="Produto">{p.name}</td>
+                <td data-label="Produto">{p.nome}</td>
                 <td data-label="Quantidade">
                   {editingIndex === i ? (
                     <div className={styles.quantidadeControls}>

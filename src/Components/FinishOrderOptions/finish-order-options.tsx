@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import Container from "../ContentContainer/Container";
 import DropdownEnderecosDisplay from "../Dropdown/dropdown-endereco-display";
+import FormEndereco from "../EnderecoForm/endereco-form";
 import styles from "./finish-order-options.module.css";
-import FormEndereco from "/src/Components/Especifies/EnderecoForm/endereco-form";
 import { Endereco } from "/src/Models/Endereco";
 
 interface FinishOrderOptionsSettingProps {

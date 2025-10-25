@@ -24,10 +24,18 @@ export default function Home() {
   const {
     setHasHydrated,
     hasHydrated,
+    carregarProdutos,
     produtosListagem,
     produtosNoCarrinho,
-    clearCarrinho,
+    limparLista,
   } = useCarrinho();
+
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      await carregarProdutos();
+    };
+    fetchProdutos();
+  }, [carregarProdutos]);
 
   const total = useMemo(
     () =>
@@ -35,15 +43,16 @@ export default function Home() {
     [produtosNoCarrinho]
   );
 
+  //pegar um padrão de categorias para filtrar
   const options = useMemo(
     () => [
       { icon: <Pizza size={24} color="crimson" />, name: "Pizza" },
       { icon: <Popsicle size={24} color="crimson" />, name: "Picole" },
-      { icon: <CakeSlice size={24} color="crimson" />, name: "Bolo" },
+      { icon: <CakeSlice size={24} color="crimson" />, name: "sobremesa" },
       { icon: <Beer size={24} color="crimson" />, name: "Cerveja" },
-      { icon: <Utensils size={24} color="crimson" />, name: "PratoFeito" },
-      { icon: <Hamburger size={24} color="crimson" />, name: "Hamburguer" },
-      { icon: <Milk size={24} color="crimson" />, name: "Bebidas" },
+      { icon: <Utensils size={24} color="crimson" />, name: "refeição" },
+      { icon: <Hamburger size={24} color="crimson" />, name: "lanche" },
+      { icon: <Milk size={24} color="crimson" />, name: "bebida" },
       { icon: <Wine size={24} color="crimson" />, name: "Vinhos" },
     ],
     []
@@ -84,10 +93,7 @@ export default function Home() {
           </Carousel>
 
           {produtosNoCarrinho.length > 0 && (
-            <button
-              className={styles.btn_limparselecao}
-              onClick={clearCarrinho}
-            >
+            <button className={styles.btn_limparselecao} onClick={limparLista}>
               Limpar seleção
             </button>
           )}

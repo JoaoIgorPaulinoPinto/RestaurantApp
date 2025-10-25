@@ -1,20 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import OrderTable from "../../../Components/Table/finish-oder-table";
 import styles from "./Pedido.module.css";
 import Container from "/src/Components/ContentContainer/Container";
-import OrderTable from "/src/Components/Especifies/Table/finish-oder-table";
 import OrderOptionsSetting from "/src/Components/FinishOrderOptions/finish-order-options";
 import { Endereco } from "/src/Models/Endereco";
-import { Produto, useCarrinho } from "/src/store/carrinho"; // ✅ caminho relativo corrigido
+import { Produto } from "/src/Models/Produto";
+import { postPedido } from "/src/Services/API/server";
+import { useCarrinho } from "/src/store/carrinho"; // ✅ caminho relativo corrigido
 
-interface respoApiProd {
-  idProduto: number;
-  quantidade: number;
-  obs: string;
-}
-interface apiRespo {
-  respoApiProd: respoApiProd[];
+export interface apiRespo {
+  produtos: Produto[];
   pagamentoMeth: string;
   endereco: Endereco | string;
   // coordenadas: { lat: number; lon: number };
@@ -28,7 +25,7 @@ export default function PedidoPage() {
   const router = useRouter();
 
   // ✅ Zustand
-  const { produtosNoCarrinho: produtos, clearCarrinho: clearProdutos } =
+  const { produtosNoCarrinho: produtos, limparLista: clearProdutos } =
     useCarrinho();
 
   // total do pedido
@@ -45,24 +42,26 @@ export default function PedidoPage() {
     console.log("Endereço selecionado:", endereco);
   }, [endereco]);
 
-  const handleFinalizar = () => {
-    const novoResp: respoApiProd[] = produtos.map((p: Produto) => ({
-      idProduto: p.id,
-      quantidade: p.quantidade,
-      obs: p.observacao || "",
-    }));
+  const enviarPedido = async (data: apiRespo) => {
+    try {
+      await postPedido(1, 1, data);
+      clearProdutos(); // ✅ limpa carrinho
+      console.log("Pedido finalizado!", data);
+      alert("Pedido finalizado! Veja o console.");
+      router.push("/"); // redireciona para home
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const handleFinalizar = () => {
     const rp: apiRespo = {
-      respoApiProd: novoResp,
+      produtos: produtos,
       pagamentoMeth: metodoPagamento,
       endereco: isEntrega ? endereco ?? "" : "Retirada no Local",
       // coordenadas: { lat: 0, lon: 0 },
     };
-
-    clearProdutos(); // ✅ limpa carrinho
-    console.log("Pedido finalizado!", rp);
-    alert("Pedido finalizado! Veja o console.");
-    router.push("/"); // redireciona para home
+    enviarPedido(rp);
   };
 
   return (

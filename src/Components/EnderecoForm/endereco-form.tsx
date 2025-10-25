@@ -105,7 +105,7 @@ export default function FormEndereco() {
         <p className={styles.error}>{errors.estado?.message}</p>
       </div>
 
-      <button type="submit">Salvar</button>
+      <button type="submit">Adicionar</button>
     </form>
   );
 }
