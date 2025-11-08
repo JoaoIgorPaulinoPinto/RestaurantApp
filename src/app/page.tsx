@@ -60,10 +60,10 @@ export default function Home() {
 
   const [selectedFilter, setSelectedFilter] = useState("");
 
-  const produtosFiltrados = useMemo(() => {
-    if (!selectedFilter) return produtosListagem;
-    return produtosListagem.filter((p) => p.categoria === selectedFilter);
-  }, [produtosListagem, selectedFilter]);
+  // const produtosFiltrados = useMemo(() => {
+  //   if (!selectedFilter) return produtosListagem;
+  //   return produtosListagem.filter((p) => p.categoria === selectedFilter);
+  // }, [produtosListagem, selectedFilter]);
 
   const handleSelectFilter = (newFilter: string) => {
     setSelectedFilter((prev) => (prev === newFilter ? "" : newFilter));
@@ -99,7 +99,7 @@ export default function Home() {
           )}
 
           <div className={styles.cardapio}>
-            {produtosFiltrados.map((product) => (
+            {produtosListagem.map((product) => (
               <ProductCard key={product.id} produto={product} />
             ))}
           </div>

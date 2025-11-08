@@ -23,7 +23,6 @@ export default function Perfil() {
         className={styles.profileButton}
       >
         <UserRound size={28} />
-        <span>Meu Perfil</span>
       </button>
 
       {isOpen && (

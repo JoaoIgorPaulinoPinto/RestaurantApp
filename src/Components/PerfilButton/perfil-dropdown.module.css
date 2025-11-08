@@ -12,7 +12,10 @@
   cursor: pointer;
   border-radius: 6px;
   font-weight: 500;
+  background: var(--primary-color);
   justify-content: left;
+  border: var(--def-border);
+  color: var(--text-color-1);
 }
 .dropdownContent {
   position: absolute;
@@ -20,10 +23,22 @@
   right: 0; /* agora alinha pela direita */
   left: auto; /* desativa o alinhamento à esquerda */
   width: 320px;
-  background: white;
-  border: 1px solid #ddd;
+  background: var(--primary-color);
+  border: var(--def-border);
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 200;
+}
+
+@media (max-width: 600px) {
+  .profileButton {
+    font-weight: 300;
+    padding: 0px 5px;
+    font-size: x-small;
+  }
+  .dropdownContent {
+    width: 250px;
+    font-size: small;
+  }
 }
