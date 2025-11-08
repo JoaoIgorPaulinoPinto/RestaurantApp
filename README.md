@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Portifolium
 
-## Getting Started
+Uma plataforma/portfolio pessoal criada por **João Igor Paulino Pinto** para destacar projetos, habilidades e experiência em desenvolvimento de software.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📦 Clonar o Repositório
+
+**_git clone https://github.com/JoaoIgorPaulinoPinto/Portifolium.git_**  
+**_cd Portifolium_**
+
+---
+
+## ⚙️ Instalar Dependências
+
+**_npm install_**  
+ou  
+**_yarn_**
+
+---
+
+## 🧱 Configurar Variáveis de Ambiente (se aplicável)
+
+Crie um arquivo **.env** na raiz do projeto e adicione as configurações necessárias, por exemplo:
+
+```
+PORT=3000
+DATABASE_URL="postgres://usuario:senha@localhost:5432/meubanco"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*(Ajuste conforme as necessidades do seu projeto)*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧰 Scripts Úteis
 
-## Learn More
+- **_npm run dev_** — Executa o projeto em modo de desenvolvimento (com hot‑reload)  
+- **_npm run build_** — Compila o código para produção  
+- **_npm start_** — Inicia a versão compilada em produção  
+- **_npm test_** — Executa os testes (se houverem)  
 
-To learn more about Next.js, take a look at the following resources:
+*(Ajuste os scripts conforme o que estiver configurado no package.json)*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌐 Acessar a Aplicação
 
-## Deploy on Vercel
+- URL local: **http://localhost:3000** *(ou a porta que você definiu)*  
+- Documentação/Site de apresentação (se houver): **http://localhost:3000/docs** ou conforme o seu setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧩 Estrutura de Pastas Sugerida
+
+```
+📦 Portifolium/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── styles/
+│   └── index.tsx
+├── public/
+├── .env
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+*(Adapte conforme a estrutura real do seu projeto)*
+
+---
+
+## 🧾 Tecnologias Utilizadas
+
+- **Node.js**  
+- **TypeScript**  
+- (Front‑end se houver) **React** / **Next.js** / ou outra estrutura  
+- **Styled‑Components** / **Tailwind CSS** (ou o que estiver usando)  
+- **GitHub Pages** / **Vercel** / **Netlify** (deploy)  
+- Outras bibliotecas/tecnologias específicas que o projeto inclua
+
+---
+
+## 💡 Observações
+
+- Mantenha o README atualizado à medida que o projeto evolui.  
+- Atualize os comandos se adicionar mais funcionalidades (por exemplo linters, testes, CI/CD).  
+- Verifique se o URL de clone e os links internos estão corretos.
+
+---
+
+## 🧑‍💻 Autor
+
+**João Igor Paulino Pinto**  
+📧 [joaoigorpaulinopinto@gmail.com](mailto:joaoigorpaulinopinto@gmail.com)  
+🌐 [https://github.com/JoaoIgorPaulinoPinto](https://github.com/JoaoIgorPaulinoPinto)
