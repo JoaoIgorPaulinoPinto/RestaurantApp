@@ -83,6 +83,7 @@ export default function Home() {
           <Carousel>
             {options.map((option, i) => (
               <CarouselOption
+                name={option.name}
                 key={i}
                 selected={selectedFilter === option.name}
                 onClick={() => handleSelectFilter(option.name)}
@@ -113,6 +114,7 @@ export default function Home() {
               onClick={() => router.push("/pedido")}
             >
               <ShoppingCart color="white" className={styles.ShoppingCart} />
+              Ver carrinho
             </button>
           </div>
         </>

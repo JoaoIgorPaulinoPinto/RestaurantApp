@@ -1,31 +1,30 @@
+/* CLASSE BASE: Contém todas as propriedades comuns de estrutura e animação */
+.carouselOption,
+.selectedCarouselOption {
+  cursor: pointer;
+  min-width: var(--size-12);
+  min-height: var(--size-12);
+  border-radius: var(--border-radius-m);
+  text-align: center;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--text-sl);
+}
+
 .carouselOption {
-    cursor: pointer;
-    min-width: var(--size-12);
-    /* 50px aproximado */
-    min-height: var(--size-12);
-    /* 50px aproximado */
-    padding: var(--size-5);
-    flex: 0 0 auto;
-    /* evita que encolha */
-    color: var(--text-color-2);
-    /* foreground-color */
-    border-radius: var(--border-radius-m);
-    /* 10px */
-    text-align: center;
-    transition: transform 0.3s;
+  padding: var(--size-5);
+  color: var(--accent-color);
+  /* foreground-color */
 }
 
 .selectedCarouselOption {
-    background-color: var(--primary-color);
-    border: var(--def-border);
-    cursor: pointer;
-    min-width: var(--size-12);
-    padding: var(--size-3);
-    /* 5px aproximado */
-    flex: 0 0 auto;
-    /* evita que encolha */
-    color: var(--text-color-2);
-    border-radius: var(--border-radius-m);
-    text-align: center;
-    transition: transform 0.3s;
+  padding: var(--size-3);
+  /* 5px aproximado */
+  color: var(--accent-color);
+
+  background-color: var(--primary-color);
+  border: var(--def-border);
 }
